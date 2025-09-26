@@ -1,26 +1,110 @@
-import Image from "next/image";
-import Link from "next/link";
-import {ExternalLink} from "lucide-react";
+'use client';
+
+import { useEffect, useState } from 'react';
+import { SiGithub, SiX, SiInstagram } from '@icons-pack/react-simple-icons';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const socialLinks = [
+    { type: 'custom', src: '/img/linkedin.svg', href: 'https://www.linkedin.com/in/eliahilse', label: 'LinkedIn' },
+    { type: 'icon', icon: SiGithub, href: 'https://github.com/eliahilse', label: 'GitHub' },
+    { type: 'icon', icon: SiX, href: 'https://x.com/eliahilse', label: 'X' },
+  ];
+
+  const categories = ['work', 'side projects', 'research', 'blog'];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <div className="min-h-screen flex flex-col justify-between p-8">
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="max-w-2xl mx-auto text-center flex flex-col">
+          {/* Name */}
+          <div 
+            className={`transform transition-all duration-700 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              Elia Hilse
+            </h1>
+          </div>
 
-      <div className="flex flex-col items-center justify-center text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={0.4} stroke="currentColor" className="size-24 mb-8 animate-pulse">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-        </svg>
+          {/* Subtitle */}
+          <div 
+            className={`transform transition-all duration-700 ease-out mb-12 ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <p className="text-lg text-muted-foreground">
+              Principal Software Engineer & Tech Lover
+            </p>
+          </div>
 
-        <h1 className="z-20 relative text-2xl font-bold">Work in Progress™</h1>
-        <p className="z-20 relative mt-4">In the meantime, you can visit my
-          <a href="https://x.com/eliahilse" className="inline-flex items-center justify-center cursor-pointer">
-            <span className="underline ml-1 mr-1">X</span>
-            <ExternalLink className="w-5 h-5"/>.
-          </a>
-        </p>
+          {/* Categories */}
+          <div 
+            className={`transform transition-all duration-700 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            <div className="flex flex-col gap-4 max-w-md mx-auto">
+              {categories.map((category) => (
+                <Link
+                  key={category}
+                  href="#"
+                  className="bg-white/7 border border-white/12 hover:border-white/20 hover:bg-white/9 transition-all duration-100 rounded-md px-4 py-2 flex items-center justify-between w-full"
+                >
+                  <span className="text-foreground font-medium">
+                    {category}
+                  </span>
+                  <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full">
+                    coming soon
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-
-    </main>
+      {/* Social Icons at Bottom */}
+      <div className="flex justify-center space-x-6 pb-8">
+        {socialLinks.map((link, index) => (
+          <div
+            key={link.label}
+            className={`transform transition-all duration-1000 ease-out ${
+              isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: `${500 + index * 50}ms` }}
+          >
+            <Link
+              href={link.href}
+              className="text-foreground p-2"
+              aria-label={link.label}
+            >
+              {link.type === 'custom' ? (
+                <img 
+                  src={link.src} 
+                  alt={link.label} 
+                  width={24} 
+                  height={24}
+                  className="w-6 h-6 filter invert"
+                />
+              ) : (
+                <link.icon size={24} />
+              )}
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
