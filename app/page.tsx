@@ -99,7 +99,10 @@ export default function Home() {
                   className="w-6 h-6 filter invert"
                 />
               ) : (
-                <link.icon size={24} />
+                (() => {
+                  const IconComponent = link.icon;
+                  return <IconComponent size={24} />;
+                })()
               )}
             </Link>
           </div>
