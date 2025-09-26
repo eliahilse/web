@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SiGithub, SiX, SiInstagram } from '@icons-pack/react-simple-icons';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,9 +13,9 @@ export default function Home() {
   }, []);
 
   const socialLinks = [
-    { type: 'custom', src: '/img/linkedin.svg', href: 'https://www.linkedin.com/in/eliahilse', label: 'LinkedIn' },
-    { type: 'icon', icon: SiGithub, href: 'https://github.com/eliahilse', label: 'GitHub' },
-    { type: 'icon', icon: SiX, href: 'https://x.com/eliahilse', label: 'X' },
+    { type: 'custom' as const, src: '/img/linkedin.svg', href: 'https://www.linkedin.com/in/eliahilse', label: 'LinkedIn' },
+    { type: 'icon' as const, icon: SiGithub, href: 'https://github.com/eliahilse', label: 'GitHub' },
+    { type: 'icon' as const, icon: SiX, href: 'https://x.com/eliahilse', label: 'X' },
   ];
 
   const categories = ['work', 'side projects', 'research', 'blog'];
@@ -99,10 +99,7 @@ export default function Home() {
                   className="w-6 h-6 filter invert"
                 />
               ) : (
-                (() => {
-                  const IconComponent = link.icon;
-                  return <IconComponent size={24} />;
-                })()
+                React.createElement(link.icon, { size: 24 })
               )}
             </Link>
           </div>
