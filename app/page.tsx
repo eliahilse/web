@@ -18,7 +18,7 @@ export default function Home() {
     { type: 'icon' as const, icon: SiX, href: 'https://x.com/eliahilse', label: 'X' },
   ];
 
-  const categories = ['work', 'side projects', 'research', 'blog'];
+  const categories = ['work', 'side projects', 'competitions', 'research', 'blog'];
 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
