@@ -49,28 +49,24 @@ export default function Home() {
           </div>
 
           {/* Categories */}
-          <div 
-            className={`transform transition-all duration-700 ease-out ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-            }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <div className="flex flex-col gap-4 max-w-md mx-auto">
-              {categories.map((category) => (
-                <Link
-                  key={category}
-                  href="#"
-                  className="bg-white/7 border border-white/12 hover:border-white/20 hover:bg-white/9 transition-all duration-100 rounded-md px-4 py-2 flex items-center justify-between w-full"
-                >
-                  <span className="text-foreground font-medium">
-                    {category}
-                  </span>
-                  <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full">
-                    coming soon
-                  </span>
-                </Link>
-              ))}
-            </div>
+          <div className="flex flex-col gap-4 max-w-md">
+            {categories.map((category, index) => (
+              <Link
+                key={category}
+                href="#"
+                className={`w-full bg-white/7 border border-white/12 hover:border-white/20 hover:bg-white/9 transition-all duration-100 rounded-md px-4 py-2 flex items-center justify-between w-full transform transition-all duration-700 ease-out ${
+                  isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                }`}
+                style={{ transitionDelay: `${300 + index * 50}ms` }}
+              >
+                <span className="text-foreground font-medium">
+                  {category}
+                </span>
+                <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full">
+                  coming soon
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
