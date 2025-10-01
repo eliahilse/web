@@ -90,9 +90,8 @@ export default function CompetitionsPage() {
                   animationFillMode: 'both'
                 }}
               >
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
-                  {/* Clickable Header + Description */}
-                  <Link href={`/competitions/${competition.slug}`} className="block group">
+                <Link href={`/competitions/${competition.slug}`} className="block group">
+                  <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
                     <div className="flex justify-between items-start mb-4">
                       <div>
                         <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:underline">
@@ -123,7 +122,6 @@ export default function CompetitionsPage() {
                     {competition.description && (
                       <p className="text-muted-foreground mb-4">{competition.description}</p>
                     )}
-                  </Link>
 
                   {/* Media + Details Row */}
                   {(competition.video || competition.team?.length || competition.pitch || competition.demo || competition.github) && (
@@ -153,7 +151,7 @@ export default function CompetitionsPage() {
                               {competition.team!.map((member, idx) => (
                                 <span key={idx}>
                                   {member.linkedin ? (
-                                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200">{member.name}</a>
+                                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="relative z-10 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200" onClick={(e) => e.stopPropagation()}>{member.name}</a>
                                   ) : (
                                     <span className="text-sm text-muted-foreground">{member.name}</span>
                                   )}
@@ -166,17 +164,18 @@ export default function CompetitionsPage() {
 
 
                         {(competition.pitch || competition.demo || competition.github || competition.video) && (
-                          <div className="flex flex-wrap gap-4 mb-2">
-                            {competition.pitch && (<a href={competition.pitch} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Pitch →</a>)}
-                            {competition.demo && (<a href={competition.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Demo →</a>)}
-                            {competition.github && (<a href={competition.github} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">GitHub →</a>)}
-                            {competition.video && (<a href={competition.video} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Video →</a>)}
+                          <div className="flex flex-wrap gap-4 mb-2" onClick={(e) => e.stopPropagation()}>
+                            {competition.pitch && (<a href={competition.pitch} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Pitch →</a>)}
+                            {competition.demo && (<a href={competition.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Demo →</a>)}
+                            {competition.github && (<a href={competition.github} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>GitHub →</a>)}
+                            {competition.video && (<a href={competition.video} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Video →</a>)}
                           </div>
                         )}
                       </div>
                     </div>
                   )}
-                </div>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>

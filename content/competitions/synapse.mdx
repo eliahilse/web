@@ -25,36 +25,29 @@ video: "https://www.youtube.com/watch?v=H_io8qfVFmg"
 
 Synapse turns hidden company expertise into action.
 
-Most organizations sit on a mountain of knowledge that’s hard to find when it matters. People leave, teams ship fast, docs go stale, and the same problems get solved again and again. Synapse makes that knowledge living, discoverable, and useful in the flow of work.
+Most organizations sit on a mountain of knowledge that's hard to find when it matters. People leave, teams ship fast, docs go stale, and the same problems get solved again and again. Synapse makes that knowledge living, discoverable, and useful in the flow of work.
 
 ## What Synapse does
 
-- **Immediate**: When someone hits a roadblock, Synapse connects them to the person who solved the problem before. Answers aren’t just documents — they’re people with context.
-- **Effortless**: No new tools to learn. Talk to Synnie — our AI agent — via chat, a quick video, or a short phone call.
+- **Immediate**: When someone hits a roadblock, Synapse connects them to the person who solved the problem before. Answers aren't just documents - they're people with context.
+- **Effortless**: No new tools to learn. Talk to Synnie - our AI agent - via chat, a quick video, or a short phone call.
 - **Living**: Synnie keeps knowledge current by checking in with people regularly and capturing what they worked on and what they learned.
 
 ## What it feels like for teams
 
-Joe gets assigned a task he’s never seen before. Instead of digging through old files, he describes the problem to Synnie. Within seconds, Synapse finds Nick from Product — the person who solved this exact issue last quarter. Joe books a meeting, and a month of work turns into a morning.
+Joe gets assigned a task he's never seen before. Instead of digging through old files, he describes the problem to Synnie. Within seconds, Synapse finds Nick from Product - the person who solved this exact issue last quarter. Joe books a meeting, and a month of work turns into a morning.
 
 ## How it works
 
-Synnie keeps organizational knowledge alive through lightweight, recurring conversations. Every week, she asks short, focused questions: what did you build, what broke, what did you learn, who did you work with? That context becomes searchable expertise across people, projects, and outcomes — not just static docs.
+Synnie keeps organizational knowledge alive through lightweight, recurring conversations. Every week, she asks short, focused questions: what did you build, what broke, what did you learn, who did you work with? That context becomes searchable expertise across people, projects, and outcomes - not just static docs.
 
 ## Synapse Nexus
 
-Synapse doesn’t just help one person at a time. The relationships Synnie uncovers form a living map of the company — **Synapse Nexus**. Leaders can see how knowledge flows, where the real experts are, and where collaboration is stuck. It’s visibility you can act on.
+Synapse doesn't just help one person at a time. The relationships Synnie uncovers form a living map of the company - **Synapse Nexus**. Leaders can see how knowledge flows, where the real experts are, and where collaboration is stuck. It's visibility you can act on.
 
 ## What we built in 36 hours
 
 While some teams focused on video production, we focused on shipping a working product:
-
-**Backend:**
-- Vector embeddings pipeline (OpenAI + pgvector) for semantic search
-- Semantic chunking for knowledge retrieval
-- Express API with Prisma ORM + PostgreSQL (Supabase)
-- Expert ranking algorithm with relevance and freshness scoring
-- Agentic orchestration with tool-calling via Claude Sonnet
 
 **Frontend:**
 - Next.js app deployed on Cloudflare Workers via OpenNext
@@ -62,21 +55,24 @@ While some teams focused on video production, we focused on shipping a working p
 - Real-time expert matching interface
 - Organizational knowledge visualization
 
-**AI Integration:**
-- Claude Haiku for topic extraction and confidence scoring
-- Claude Sonnet for agentic reasoning and conversational chat
-- ElevenLabs for text-to-speech and speech-to-text
-- BeyondPresence for video interview capabilities
+**Backend:**
+- Vector embeddings pipeline (OpenAI + pgvector) for semantic search
+- Semantic chunking for knowledge retrieval
+- Express API with Prisma ORM + PostgreSQL (Supabase)
+- Expert ranking algorithm with relevance and freshness scoring
+
+
+- Chat with tool-calling via Claude Sonnet
 
 Everything was deployed and working by submission time. Check the [GitHub repo](https://github.com/synapsedotai/synapse) or test the [API health endpoint](https://api.synapse.elia.vc/healthz) yourself.
 
 ## A note on the hackathon
 
-This track was judged exclusively on video submissions — no code review, no live demos, no technical evaluation. We spent 36 hours building and deploying the product above, then made a video with what time remained.
+This track was judged exclusively on video submissions - no code review, no live demos, no technical evaluation. We spent 36 hours building and deploying the product above, then made a video with what time remained.
 
 The winning team submitted a polished, highly produced video showcasing what appeared to be a static prototype. Judges admitted they "had no idea about code" and debated for over an hour before deciding between production value and working software.
 
-We placed second. We're proud of what we built — and that it's running as a true MVP, not a mockup.
+We placed second. We're proud of what we built - and that it's running as a true MVP, not a mockup.
 
 ## Explore
 
