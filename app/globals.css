@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +120,30 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Article typography */
+.article-content {
+  @apply prose prose-invert max-w-none;
+}
+.article-content h1 {
+  @apply text-3xl font-bold mt-8 mb-4;
+}
+.article-content h2 {
+  @apply text-2xl font-semibold mt-6 mb-3;
+}
+.article-content p {
+  @apply leading-7 mb-4 text-muted-foreground;
+}
+.article-content ul {
+  @apply list-disc pl-6 mb-4;
+}
+.article-content ol {
+  @apply list-decimal pl-6 mb-4;
+}
+.article-content code {
+  @apply text-sm;
+}
+.article-content pre {
+  @apply overflow-x-auto rounded-lg border border-white/10 p-4 mb-4;
 }

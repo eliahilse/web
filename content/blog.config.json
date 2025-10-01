@@ -1,0 +1,40 @@
+{
+  "categories": {
+    "competitions": {
+      "title": "Competitions",
+      "description": "Hackathons, contests, and competitive programming",
+      "color": "#10b981"
+    },
+    "work": {
+      "title": "Work",
+      "description": "Professional projects and experiences",
+      "color": "#3b82f6"
+    },
+    "side-projects": {
+      "title": "Side Projects", 
+      "description": "Personal projects and experiments",
+      "color": "#8b5cf6"
+    },
+    "research": {
+      "title": "Research",
+      "description": "Academic research and publications",
+      "color": "#f59e0b"
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Thoughts, tutorials, and insights",
+      "color": "#ef4444"
+    }
+  },
+  "author": {
+    "name": "Elia Hilse",
+    "title": "Principal Software Engineer & Tech Lover",
+    "email": "elia@example.com",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/eliahilse",
+      "github": "https://github.com/eliahilse",
+      "x": "https://x.com/eliahilse"
+    }
+  }
+}
+
