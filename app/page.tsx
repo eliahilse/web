@@ -22,7 +22,7 @@ export default function Home() {
     { name: 'side projects', href: '#' },
     { name: 'competitions', href: '/competitions' },
     { name: 'research', href: '#' },
-    { name: 'blog', href: '#' }
+    { name: 'blog', href: '/blog' }
   ];
 
   return (

@@ -45,9 +45,38 @@ Synnie keeps organizational knowledge alive through lightweight, recurring conve
 
 Synapse doesn’t just help one person at a time. The relationships Synnie uncovers form a living map of the company — **Synapse Nexus**. Leaders can see how knowledge flows, where the real experts are, and where collaboration is stuck. It’s visibility you can act on.
 
+## What we built in 36 hours
+
+While some teams focused on video production, we focused on shipping a working product:
+
+**Backend:**
+- Vector embeddings pipeline (OpenAI + pgvector) for semantic search
+- Semantic chunking for knowledge retrieval
+- Express API with Prisma ORM + PostgreSQL (Supabase)
+- Expert ranking algorithm with relevance and freshness scoring
+- Agentic orchestration with tool-calling via Claude Sonnet
+
+**Frontend:**
+- Next.js app deployed on Cloudflare Workers via OpenNext
+- Multi-modal AI interviews: chat, voice (including phone support), and video
+- Real-time expert matching interface
+- Organizational knowledge visualization
+
+**AI Integration:**
+- Claude Haiku for topic extraction and confidence scoring
+- Claude Sonnet for agentic reasoning and conversational chat
+- ElevenLabs for text-to-speech and speech-to-text
+- BeyondPresence for video interview capabilities
+
+Everything was deployed and working by submission time. Check the [GitHub repo](https://github.com/synapsedotai/synapse) or test the [API health endpoint](https://api.synapse.elia.vc/healthz) yourself.
+
 ## A note on the hackathon
 
-This track was judged on video submissions only — no code review. That favored production value over technical depth. We still placed second after a more than one‑hour debate among judges on whether we or a highly produced video should take first. We’re proud of that outcome — and even more proud of how far the product has come since.
+This track was judged exclusively on video submissions — no code review, no live demos, no technical evaluation. We spent 36 hours building and deploying the product above, then made a video with what time remained.
+
+The winning team submitted a polished, highly produced video showcasing what appeared to be a static prototype. Judges admitted they "had no idea about code" and debated for over an hour before deciding between production value and working software.
+
+We placed second. We're proud of what we built — and that it's running as a true MVP, not a mockup.
 
 ## Explore
 

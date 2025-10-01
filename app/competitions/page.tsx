@@ -1,6 +1,6 @@
-import fs from 'fs/promises'
-import path from 'path'
-import matter from 'gray-matter'
+'use client';
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 interface TeamMember {
@@ -24,51 +24,51 @@ interface CompetitionMetadata {
   video?: string // URL to YouTube or other video
 }
 
-async function getCompetitions(): Promise<CompetitionMetadata[]> {
-  const dir = path.join(process.cwd(), 'content', 'competitions')
-  let files: string[] = []
-  try {
-    files = await fs.readdir(dir)
-  } catch {
-    return []
-  }
-  const mdxFiles = files.filter(f => f.endsWith('.mdx'))
-  const entries: CompetitionMetadata[] = []
-  for (const file of mdxFiles) {
-    const filepath = path.join(dir, file)
-    const raw = await fs.readFile(filepath, 'utf8')
-    const { data } = matter(raw)
-    const slug = file.replace(/\.mdx$/, '')
-    entries.push({
-      title: data.title ?? slug,
-      pitch: data.pitch,
-      demo: data.demo,
-      github: data.github,
-      hackathon: data.hackathon ?? '',
-      placement: data.placement,
-      location: data.location,
-      track: data.track,
-      team: data.team,
-      date: data.date ?? '1970-01-01',
-      slug,
-      description: data.description,
-      video: data.video,
-    })
-  }
-  // Newest first
-  entries.sort((a, b) => (a.date < b.date ? 1 : -1))
-  return entries
-}
+export default function CompetitionsPage() {
+  const [competitions, setCompetitions] = useState<CompetitionMetadata[]>([])
+  const [isLoaded, setIsLoaded] = useState(false)
 
-export default async function CompetitionsPage() {
-  const competitions = await getCompetitions()
+  useEffect(() => {
+    // Mock data - in production this would fetch from an API route
+    const mockCompetitions: CompetitionMetadata[] = [
+      {
+        title: "Synapse",
+        pitch: "",
+        demo: "https://synapse.elia.vc",
+        github: "https://github.com/synapsedotai/synapse",
+        hackathon: "CDTM x Anthropic Hackathon (ft. Elevenlabs, Lovable)",
+        placement: "2nd (jury debated 1h)",
+        location: "Munich, DE",
+        track: "Visionaries Club",
+        team: [
+          { name: "Elia Hilse", linkedin: "https://linkedin.com/in/eliahilse" },
+          { name: "Jan Tokic", linkedin: "https://www.linkedin.com/in/jan-tokic" },
+          { name: "Jan Jürgens", linkedin: "https://www.linkedin.com/in/janjuergens1/" },
+          { name: "Johannes Schwab", linkedin: "https://www.linkedin.com/in/johannes-nic-schwab/" },
+          { name: "Johannes Brix", linkedin: "https://www.linkedin.com/in/johannesbrix/" }
+        ],
+        date: "2024-01-15",
+        slug: "synapse",
+        description: "Built Synapse: a self-learning knowledge system identifying internal experts and surfacing management insights across an organization.",
+        video: "https://www.youtube.com/watch?v=H_io8qfVFmg"
+      }
+    ]
+    
+    setCompetitions(mockCompetitions)
+    setIsLoaded(true)
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="mb-12">
+          <div 
+            className={`mb-12 transform transition-all duration-700 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
+            style={{ transitionDelay: '100ms' }}
+          >
             <Link 
               href="/"
               className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
@@ -81,8 +81,15 @@ export default async function CompetitionsPage() {
 
           {/* Competitions Grid */}
           <div className="grid gap-6">
-            {competitions.map((competition) => (
-              <div key={competition.slug} className="block">
+            {competitions.map((competition, index) => (
+              <div 
+                key={competition.slug} 
+                className="block animate-fade-in-up"
+                style={{ 
+                  animationDelay: `${200 + index * 100}ms`,
+                  animationFillMode: 'both'
+                }}
+              >
                 <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
                   {/* Clickable Header + Description */}
                   <Link href={`/competitions/${competition.slug}`} className="block group">
