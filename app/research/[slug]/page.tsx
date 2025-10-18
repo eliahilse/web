@@ -113,3 +113,4 @@ export default async function ResearchDetail({ params }: { params: Promise<{ slu
   )
 }
 
+

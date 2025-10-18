@@ -82,3 +82,4 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
   )
 }
 
+
