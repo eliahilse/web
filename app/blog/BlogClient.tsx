@@ -2,6 +2,16 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Funnel, MagnifyingGlass } from '@phosphor-icons/react'
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command'
 
 interface BlogMetadata {
   title: string
@@ -19,15 +29,28 @@ interface BlogClientProps {
 }
 
 export default function BlogClient({ posts, allCategories, allTags }: BlogClientProps) {
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedTag, setSelectedTag] = useState<string>('all')
+  const [showTagFilter, setShowTagFilter] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
     setIsLoaded(true)
   }, [])
 
-  // Filter posts
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setSearchOpen((open) => !open)
+      }
+    }
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
+
   const filteredPosts = posts.filter(post => {
     const categoryMatch = selectedCategory === 'all' || post.category === selectedCategory
     const tagMatch = selectedTag === 'all' || post.tags?.includes(selectedTag)
@@ -39,13 +62,13 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
       <div className="flex-1">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div 
+          <div
             className={`mb-8 transform transition-all duration-700 ease-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <Link 
+            <Link
               href="/"
               className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
             >
@@ -56,22 +79,20 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
           </div>
 
           {/* Filters */}
-          <div 
+          <div
             className={`mb-8 space-y-4 transform transition-all duration-700 ease-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
             style={{ transitionDelay: '200ms' }}
           >
             <div className="flex flex-wrap gap-4 items-center">
-              <span className="text-sm text-muted-foreground">Filter by:</span>
-              
               {/* Category Filter */}
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-2 flex-wrap flex-1">
                 {allCategories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`text-xs px-3 py-1.5 rounded-full transition-all duration-200 ${
+                    className={`text-xs px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
                       selectedCategory === cat
                         ? 'bg-white/20 text-foreground'
                         : 'bg-white/5 text-muted-foreground hover:bg-white/10'
@@ -82,37 +103,56 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                 ))}
               </div>
 
-              {/* Tag Filter */}
-              {allTags.length > 1 && (
-                <>
-                  <span className="text-muted-foreground">•</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {allTags.map((tag) => (
-                      <button
-                        key={tag}
-                        onClick={() => setSelectedTag(tag)}
-                        className={`text-xs px-3 py-1.5 rounded transition-all duration-200 ${
-                          selectedTag === tag
-                            ? 'bg-white/20 text-foreground'
-                            : 'bg-white/10 text-foreground/80 hover:bg-white/15'
-                        }`}
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+              {/* Icons */}
+              <div className="flex gap-2 items-center">
+                {allTags.length > 1 && (
+                  <button
+                    onClick={() => setShowTagFilter(!showTagFilter)}
+                    className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
+                      showTagFilter ? 'bg-white/20 text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-white/10'
+                    }`}
+                    title="Filter by tags"
+                  >
+                    <Funnel size={18} weight={showTagFilter ? 'fill' : 'regular'} />
+                  </button>
+                )}
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                  title="Search (⌘K)"
+                >
+                  <MagnifyingGlass size={18} />
+                </button>
+              </div>
             </div>
+
+            {/* Tag Filter (collapsible) */}
+            {showTagFilter && allTags.length > 1 && (
+              <div className="flex gap-2 flex-wrap animate-[fadeIn_0.15s_ease-out]">
+                {allTags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => setSelectedTag(tag)}
+                    className={`text-xs px-3 py-1.5 rounded transition-all duration-200 cursor-pointer ${
+                      selectedTag === tag
+                        ? 'bg-white/20 text-foreground'
+                        : 'bg-white/10 text-foreground/80 hover:bg-white/15'
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Blog Posts Grid */}
           <div className="grid gap-6" key={`${selectedCategory}-${selectedTag}`}>
             {filteredPosts.map((post, index) => (
-              <div 
+              <div
                 key={post.slug}
                 className="animate-fade-in-up"
-                style={{ 
+                style={{
                   animationDelay: `${300 + index * 100}ms`,
                   animationFillMode: 'both'
                 }}
@@ -121,7 +161,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1">
-                        <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:underline">
+                        <h2 className="text-xl font-semibold text-foreground mb-2">
                           {post.title}
                         </h2>
                         {post.description && (
@@ -137,10 +177,10 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
 
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
                         })}
                       </time>
                       {post.tags && post.tags.length > 0 && (
@@ -163,7 +203,33 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
           </div>
         </div>
       </div>
+
+      {/* Search Dialog */}
+      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <CommandInput placeholder="Search posts..." />
+        <CommandList>
+          <CommandEmpty>No posts found.</CommandEmpty>
+          <CommandGroup heading="Posts">
+            {posts.map((post) => (
+              <CommandItem
+                key={post.slug}
+                value={`${post.title} ${post.description || ''} ${post.tags?.join(' ') || ''}`}
+                onSelect={() => {
+                  router.push(`/blog/${post.slug}`)
+                  setSearchOpen(false)
+                }}
+              >
+                <div className="flex flex-col">
+                  <span>{post.title}</span>
+                  {post.description && (
+                    <span className="text-xs text-muted-foreground">{post.description}</span>
+                  )}
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </div>
   )
 }
-

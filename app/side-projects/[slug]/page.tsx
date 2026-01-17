@@ -49,7 +49,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
               {data.returns && (
                 <>
                   <span>•</span>
-                  <span className="text-green-400">{String(data.returns)}</span>
+                  <span className="text-nova-red">{String(data.returns)}</span>
                 </>
               )}
               {data.status && (

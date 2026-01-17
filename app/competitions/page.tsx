@@ -94,7 +94,7 @@ export default function CompetitionsPage() {
                   <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:underline">
+                        <h2 className="text-xl font-semibold text-foreground mb-2">
                           {competition.title}
                         </h2>
                         <div className="flex flex-wrap gap-2 text-sm text-muted-foreground items-center">
@@ -102,7 +102,7 @@ export default function CompetitionsPage() {
                           {competition.placement && (
                             <>
                               <span>•</span>
-                              <span className="text-green-400">{competition.placement}</span>
+                              <span className="text-nova-red">{competition.placement}</span>
                             </>
                           )}
                           {competition.track && (

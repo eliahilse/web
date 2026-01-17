@@ -81,7 +81,7 @@ export default function ResearchPage() {
                   <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
-                        <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:underline">
+                        <h2 className="text-xl font-semibold text-foreground mb-2">
                           {item.title}
                         </h2>
                         {item.authors && item.authors.length > 0 && (

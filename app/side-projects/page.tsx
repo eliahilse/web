@@ -25,7 +25,7 @@ export default function SideProjectsPage() {
         description: "Identified and systematically exploited inefficiencies in casino token reward mechanics across 7 platforms, achieving six-figure returns through quantitative modeling, automated play, and strategic payout management.",
         status: "ongoing",
         timeline: "2023-2025 (2 years)",
-        returns: "Six figures (peak: $20k/month)",
+        returns: "Six figures (peak: $10k/month)",
         date: "2024-01-01",
         tags: ["quantitative", "optimization", "operations"],
         slug: "casino-arbitrage"
@@ -72,7 +72,7 @@ export default function SideProjectsPage() {
                   <Link href={`/side-projects/${project.slug}`} className="block group">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
-                        <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:underline">
+                        <h2 className="text-xl font-semibold text-foreground mb-2">
                           {project.title}
                         </h2>
                         <div className="flex flex-wrap gap-2 text-sm text-muted-foreground items-center mb-3">
@@ -80,7 +80,7 @@ export default function SideProjectsPage() {
                           {project.returns && (
                             <>
                               <span>•</span>
-                              <span className="text-green-400">{project.returns}</span>
+                              <span className="text-nova-red">{project.returns}</span>
                             </>
                           )}
                           {project.status && (
