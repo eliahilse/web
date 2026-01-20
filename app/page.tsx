@@ -18,7 +18,7 @@ export default function Home() {
   ];
 
   const categories = [
-    { name: 'work', href: '#' },
+    { name: 'work', href: '/work' },
     { name: 'side projects', href: '/side-projects' },
     { name: 'competitions', href: '/competitions' },
     { name: 'research', href: '/research' },
