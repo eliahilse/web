@@ -7,6 +7,18 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import Link from 'next/link'
 
+function formatPeriod(startDate: string, endDate: string): string {
+  const formatDate = (d: string) => {
+    const [year, month] = d.split('-')
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return `${months[parseInt(month, 10) - 1]} ${year}`
+  }
+  const start = formatDate(startDate)
+  const end = formatDate(endDate)
+  if (start === end) return start
+  return `${start} – ${end}`
+}
+
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'side-projects', `${slug}.mdx`)
   const raw = await fs.readFile(filepath, 'utf8')
@@ -45,7 +57,9 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
               <p className="text-muted-foreground mb-3">{String(data.description)}</p>
             )}
             <div className="flex items-center gap-3 text-sm text-muted-foreground flex-wrap">
-              {data.timeline && <span>{String(data.timeline)}</span>}
+              {data.startDate && data.endDate && (
+                <span className="font-mono">{formatPeriod(data.startDate, data.endDate)}</span>
+              )}
               {data.returns && (
                 <>
                   <span>•</span>
