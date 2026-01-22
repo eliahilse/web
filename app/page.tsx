@@ -72,7 +72,7 @@ export default function Home() {
             style={{ transitionDelay: "200ms" }}
           >
             <p className="text-lg text-muted-foreground">
-              Principal Software Engineer <span className="font-inter">→</span> CTO
+              Principal Software Engineer & Tech Lover
             </p>
           </div>
 
@@ -101,7 +101,10 @@ export default function Home() {
                     ) : (
                       <>
                         <span className="sr-only">open</span>
-                        <ArrowRight size={12} className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5" />
+                        <ArrowRight
+                          size={12}
+                          className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5"
+                        />
                       </>
                     )}
                   </span>
