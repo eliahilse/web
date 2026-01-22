@@ -52,6 +52,15 @@ export default function CompetitionsPage() {
         slug: "synapse",
         description: "Built Synapse: a self-learning knowledge system identifying internal experts and surfacing management insights across an organization.",
         video: "https://www.youtube.com/watch?v=H_io8qfVFmg"
+      },
+      {
+        title: "ev.io UI Redesign",
+        hackathon: "ev.io UI Redesign Competition",
+        placement: "1st – $10k in NFTs, changes implemented 1:1",
+        location: "Online",
+        date: "2022-09-01",
+        slug: "evio-ui-redesign",
+        description: "Redesigned the UI for ev.io, a web-based online FPS game with ~100k MAUs that was active in the web3 space at the time.",
       }
     ]
     

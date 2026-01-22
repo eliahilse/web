@@ -33,8 +33,10 @@ export default function Home() {
   ];
 
   const categories = [
+    { name: "about", href: "/about" },
     { name: "work", href: "/work" },
     { name: "side projects", href: "/side-projects" },
+    { name: "open source", href: "/open-source" },
     { name: "competitions", href: "/competitions" },
     { name: "research", href: "/research" },
     { name: "blog", href: "/blog" },
