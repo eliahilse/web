@@ -39,7 +39,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
           <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block">← Back to blog</Link>
           
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
+            <h1 className="text-3xl font-bold text-foreground mb-2 page-heading">{String(data.title ?? slug)}</h1>
             {data.description && (
               <p className="text-muted-foreground mb-3">{String(data.description)}</p>
             )}

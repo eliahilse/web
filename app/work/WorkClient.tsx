@@ -81,7 +81,7 @@ export default function WorkClient({ experiences }: { experiences: WorkMetadata[
                   <Link href={`/work/${exp.slug}`} className="flex-1 group">
                     <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                        <h2 className="text-xl font-semibold text-foreground group-hover:text-nova-red transition-colors">
+                        <h2 className="text-xl font-semibold text-foreground transition-colors">
                           {exp.title}
                         </h2>
                         <span className="text-sm text-muted-foreground">
