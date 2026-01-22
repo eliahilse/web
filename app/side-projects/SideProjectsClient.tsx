@@ -78,7 +78,7 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                         </h2>
                         <div className="flex items-center gap-2">
                           {project.returns && (
-                            <span className="text-sm text-nova-red">
+                            <span className="text-xs px-2 py-0.5 rounded bg-nova-red/15 border border-nova-red/30 text-nova-red">
                               {project.returns}
                             </span>
                           )}
@@ -91,7 +91,7 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                       </div>
 
                       {project.description && (
-                        <p className="text-muted-foreground text-sm mb-4">
+                        <p className="text-muted-foreground text-xs mb-4">
                           {project.description}
                         </p>
                       )}

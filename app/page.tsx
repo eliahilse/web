@@ -106,7 +106,7 @@ export default function Home() {
                   alt={link.label} 
                   width={24} 
                   height={24}
-                  className="w-6 h-6 filter invert"
+                  className="w-6 h-6 dark:invert"
                 />
               ) : (
                 React.createElement(link.icon, { size: 24 })
