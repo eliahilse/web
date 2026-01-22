@@ -1,10 +1,26 @@
 ---
 title: "F*ck Azure Key Vault: How I Built Their HSM Offering Myself to Sign Windows Executables"
 description: "SSL.com wanted $2,000 to install my OV cert on Azure's HSM. So I rebuilt their entire code signing infrastructure myself for my desktop app CI/CD pipeline."
-date: "2025-10-20"
+date: "2026-01-27"
 tags: ["technical", "security", "infrastructure", "windows"]
 category: "technical"
 ---
 
-*Content coming soon*
+In the context of my side-project phantom I faced the need to distribute desktop software (Windows and MacOS).
+While MacOS is extremely CI/CD friendly with its signing process (just get an Apple Developer Account for $99/yr and use an access token in the CI/CD env), Windows is not.
 
+Few years ago, they switched from regular certificates as a signing requirement to certificates in a hardware security module (HSM) - e.g. physically on a YubiKey or on "physical" signing infrastructure by Azure.
+
+The process to buy a certificate and then onto a YubiKey is pretty straightforward, costs about $200 a year.
+If then wanting to automate the signing process though (e.g. in a scenario where multiple engineers not physically in the same place build something) things get tricky - Azure is the only major cloud vendor offering physical signing infra. Problem: cert vendors charge insane amounts to deploy certificates to such cloud signing infra - SSL.com e.g. generously offered to do it for $2,000.
+
+This led me to the (unreasonable) decision to rebuild the signing infra locally.
+
+## Step 1: Securely Exposing parts of your home-network
+
+I don't know why really, but at the time I got obsessed with the idea of having some compute run locally in my room, like a "mini server-farm".
+So I ordered a bunch of mini-PCs with Intel's latest-gen Alder-Lake ULP chips (think N97s), switches, and a dedicated routing mini-pc.
+
+At the time I was running a bunch of remote desktops for the agency renting the Phantom tool-suite (about 10 remote servers totaling ~300$ monthly)...
+
+Paused @ 22-01-2026
