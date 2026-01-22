@@ -45,7 +45,7 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="page-container">
           <BackLink href="/work" label="Back to work" />
 
           <div className="mb-8">

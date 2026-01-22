@@ -48,7 +48,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="page-container">
           <BackLink href="/side-projects" label="Back to side projects" />
           
           <div className="mb-6">

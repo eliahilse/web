@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import BackLink from '@/components/BackLink'
 
 interface ResearchMetadata {
@@ -49,7 +49,7 @@ export default function ResearchPage() {
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
-        <div className="max-w-4xl mx-auto">
+        <div className="page-container">
           {/* Header */}
           <div 
             className={`mb-12 transform transition-all duration-700 ease-out ${

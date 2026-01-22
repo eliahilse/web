@@ -1,6 +1,6 @@
 ---
 title: "F*ck Azure Key Vault: How I Built Their HSM Offering Myself to Sign Windows Executables"
-description: "SSL.com wanted $2,000 to install my OV cert on Azure's HSM. So I rebuilt their entire code signing infrastructure myself for my desktop app CI/CD pipeline."
+description: "SSL.com wanted $2,000 to install my OV cert on Azure's HSM. Took it as an excuse to build a local mini-dc and my own HSM code-signing infra."
 date: "2026-01-27"
 tags: ["technical", "security", "infrastructure", "windows"]
 category: "technical"
@@ -21,6 +21,7 @@ This led me to the (unreasonable) decision to rebuild the signing infra locally.
 I don't know why really, but at the time I got obsessed with the idea of having some compute run locally in my room, like a "mini server-farm".
 So I ordered a bunch of mini-PCs with Intel's latest-gen Alder-Lake ULP chips (think N97s), switches, and a dedicated routing mini-pc.
 
-At the time I was running a bunch of remote desktops for the agency renting the Phantom tool-suite (about 10 remote servers totaling ~300$ monthly)...
+At the time I was running a bunch of remote desktops for the agency renting the Phantom tool-suite (about 10 remote servers totaling ~300$ monthly) - base plan was to shift these VPSs to run on on-prem mini-pcs (also providing a better UX due to dedicated iGPUs).
 
-Paused @ 22-01-2026
+Took the router mini-pc, set up a basic dhcp server + a few iptables rules to fully isolate anything beyond it from the local network.
+The router would then send all traffic via tailscale to a Hetzner exit-node (ensuring our home IP staying clean regardless).

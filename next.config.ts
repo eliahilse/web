@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 // Avoid passing non-serializable plugin functions in Turbopack mode

@@ -5,14 +5,20 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import Link from 'next/link'
+import rehypeRaw from 'rehype-raw'
+import { Link } from 'next-view-transitions'
 import BackLink from '@/components/BackLink'
 
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'blog', `${slug}.mdx`)
   const raw = await fs.readFile(filepath, 'utf8')
   const { data, content } = matter(raw)
-  const file = await unified().use(remarkParse).use(remarkRehype).use(rehypeStringify).process(content)
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeStringify)
+    .process(content)
   const html = String(file)
   return { data, html }
 }
@@ -36,7 +42,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="page-container">
           <BackLink href="/blog" label="Back to blog" />
           
           <div className="mb-6">

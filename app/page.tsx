@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { SiGithub, SiX } from '@icons-pack/react-simple-icons';
-import Link from 'next/link';
+import React, { useEffect, useState } from "react";
+import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { Link } from "next-view-transitions";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -12,29 +12,49 @@ export default function Home() {
   }, []);
 
   const socialLinks = [
-    { type: 'custom' as const, src: '/img/linkedin.svg', href: 'https://www.linkedin.com/in/eliahilse', label: 'LinkedIn' },
-    { type: 'icon' as const, icon: SiGithub, href: 'https://github.com/eliahilse', label: 'GitHub' },
-    { type: 'icon' as const, icon: SiX, href: 'https://x.com/eliahilse', label: 'X' },
+    {
+      type: "custom" as const,
+      src: "/img/linkedin.svg",
+      href: "https://www.linkedin.com/in/eliahilse",
+      label: "LinkedIn",
+    },
+    {
+      type: "icon" as const,
+      icon: SiGithub,
+      href: "https://github.com/eliahilse",
+      label: "GitHub",
+    },
+    {
+      type: "icon" as const,
+      icon: SiX,
+      href: "https://x.com/eliahilse",
+      label: "X",
+    },
   ];
 
   const categories = [
-    { name: 'work', href: '/work' },
-    { name: 'side projects', href: '/side-projects' },
-    { name: 'competitions', href: '/competitions' },
-    { name: 'research', href: '/research' },
-    { name: 'blog', href: '/blog' }
+    { name: "work", href: "/work" },
+    { name: "side projects", href: "/side-projects" },
+    { name: "competitions", href: "/competitions" },
+    { name: "research", href: "/research" },
+    { name: "blog", href: "/blog" },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-8">
+    <div className="min-h-screen flex flex-col justify-between p-8 relative">
+      {/* Background */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center grayscale opacity-20 dark:opacity-10"
+        style={{ backgroundImage: "url(/img/bg2.avif)" }}
+      />
       <div className="flex-1 flex flex-col items-center justify-center">
         <div className="max-w-2xl mx-auto text-center flex flex-col">
           {/* Name */}
-          <div 
+          <div
             className={`transform transition-all duration-700 ease-out ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
-            style={{ transitionDelay: '100ms' }}
+            style={{ transitionDelay: "100ms" }}
           >
             <h1 className="text-4xl font-bold text-foreground mb-4">
               Elia Hilse
@@ -42,11 +62,11 @@ export default function Home() {
           </div>
 
           {/* Subtitle */}
-          <div 
+          <div
             className={`transform transition-all duration-700 ease-out mb-12 ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
-            style={{ transitionDelay: '200ms' }}
+            style={{ transitionDelay: "200ms" }}
           >
             <p className="text-lg text-muted-foreground">
               Principal Software Engineer & Tech Lover
@@ -59,7 +79,9 @@ export default function Home() {
               <div
                 key={category.name}
                 className={`transform transition-all duration-700 ease-out ${
-                  isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  isLoaded
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0"
                 }`}
                 style={{ transitionDelay: `${300 + index * 50}ms` }}
               >
@@ -71,10 +93,14 @@ export default function Home() {
                     {category.name}
                   </span>
                   <span className="bg-tag text-foreground/70 text-xs px-3 py-1 rounded-full inline-flex items-center gap-1">
-                    {category.href === '#' ? 'coming soon' : (
+                    {category.href === "#" ? (
+                      "coming soon"
+                    ) : (
                       <>
                         <span className="sr-only">open</span>
-                        <span className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                        <span className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5">
+                          →
+                        </span>
                       </>
                     )}
                   </span>
@@ -91,7 +117,7 @@ export default function Home() {
           <div
             key={link.label}
             className={`transform transition-all duration-1000 ease-out ${
-              isLoaded ? 'opacity-100' : 'opacity-0'
+              isLoaded ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: `${500 + index * 50}ms` }}
           >
@@ -100,11 +126,11 @@ export default function Home() {
               className="text-foreground p-2"
               aria-label={link.label}
             >
-              {link.type === 'custom' ? (
-                <img 
-                  src={link.src} 
-                  alt={link.label} 
-                  width={24} 
+              {link.type === "custom" ? (
+                <img
+                  src={link.src}
+                  alt={link.label}
+                  width={24}
                   height={24}
                   className="w-6 h-6 dark:invert"
                 />

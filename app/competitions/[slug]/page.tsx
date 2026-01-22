@@ -35,7 +35,7 @@ export default async function CompetitionDetail({ params }: { params: Promise<{ 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="page-container">
           <BackLink href="/competitions" label="Back to competitions" />
           <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
           {data.description && (

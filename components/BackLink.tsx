@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { CaretLeft } from '@phosphor-icons/react'
 
 interface BackLinkProps {
