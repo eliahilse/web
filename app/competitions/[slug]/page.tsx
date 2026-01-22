@@ -60,10 +60,10 @@ export default async function CompetitionDetail({ params }: { params: Promise<{ 
                 )}
                 {(data.pitch || data.demo || data.github || data.video) && (
                   <div className="flex flex-wrap gap-4">
-                    {data.pitch && (<a href={String(data.pitch)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Pitch →</a>)}
-                    {data.demo && (<a href={String(data.demo)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Demo →</a>)}
-                    {data.github && (<a href={String(data.github)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">GitHub →</a>)}
-                    {data.video && (<a href={String(data.video)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">Video →</a>)}
+                    {data.pitch && (<a href={String(data.pitch)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">Pitch →</a>)}
+                    {data.demo && (<a href={String(data.demo)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">Demo →</a>)}
+                    {data.github && (<a href={String(data.github)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">GitHub →</a>)}
+                    {data.video && (<a href={String(data.video)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">Video →</a>)}
                   </div>
                 )}
               </div>

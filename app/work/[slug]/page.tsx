@@ -49,9 +49,9 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
           <BackLink href="/work" label="Back to work" />
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2 page-heading">{String(data.title ?? slug)}</h1>
 
-            <p className="text-nova-red font-medium text-lg mb-3">{String(data.role)}</p>
+            <span className="inline-block text-sm px-3 py-1 rounded-full bg-tag text-foreground/70 mb-3">{String(data.role)}</span>
 
             <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-4">
               {data.startDate && data.endDate && (

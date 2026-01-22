@@ -83,22 +83,22 @@ export default async function ResearchDetail({ params }: { params: Promise<{ slu
             {data.links && (
               <div className="flex flex-wrap gap-4 mb-6">
                 {data.links.whitepaper && (
-                  <a href={String(data.links.whitepaper)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">
+                  <a href={String(data.links.whitepaper)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">
                     View Whitepaper →
                   </a>
                 )}
                 {data.links.website && (
-                  <a href={String(data.links.website)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">
+                  <a href={String(data.links.website)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">
                     Website →
                   </a>
                 )}
                 {data.links.github && (
-                  <a href={String(data.links.github)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">
+                  <a href={String(data.links.github)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">
                     GitHub →
                   </a>
                 )}
                 {data.links.pdf && (
-                  <a href={String(data.links.pdf)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200">
+                  <a href={String(data.links.pdf)} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200">
                     Download PDF →
                   </a>
                 )}

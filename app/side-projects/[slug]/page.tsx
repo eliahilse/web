@@ -63,7 +63,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
               {data.returns && (
                 <>
                   <span>•</span>
-                  <span className="text-nova-red">{String(data.returns)}</span>
+                  <span className="bg-tag text-foreground/70 text-xs px-3 py-1 rounded-full">{String(data.returns)}</span>
                 </>
               )}
               {data.status && (

@@ -161,10 +161,10 @@ export default function CompetitionsPage() {
 
                         {(competition.pitch || competition.demo || competition.github || competition.video) && (
                           <div className="flex flex-wrap gap-4 mb-2" onClick={(e) => e.stopPropagation()}>
-                            {competition.pitch && (<a href={competition.pitch} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Pitch →</a>)}
-                            {competition.demo && (<a href={competition.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Demo →</a>)}
-                            {competition.github && (<a href={competition.github} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>GitHub →</a>)}
-                            {competition.video && (<a href={competition.video} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-white transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Video →</a>)}
+                            {competition.pitch && (<a href={competition.pitch} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Pitch →</a>)}
+                            {competition.demo && (<a href={competition.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Demo →</a>)}
+                            {competition.github && (<a href={competition.github} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200" onClick={(e) => e.stopPropagation()}>GitHub →</a>)}
+                            {competition.video && (<a href={competition.video} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:opacity-70 transition-colors duration-200" onClick={(e) => e.stopPropagation()}>Video →</a>)}
                           </div>
                         )}
                       </div>

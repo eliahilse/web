@@ -103,7 +103,7 @@ export default function ResearchPage() {
                           href={item.links.whitepaper} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-sm text-foreground hover:text-white transition-colors duration-200"
+                          className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                           onClick={(e) => e.stopPropagation()}
                         >
                           View Whitepaper →
@@ -114,7 +114,7 @@ export default function ResearchPage() {
                           href={item.links.website} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-sm text-foreground hover:text-white transition-colors duration-200"
+                          className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                           onClick={(e) => e.stopPropagation()}
                         >
                           Website →
@@ -125,7 +125,7 @@ export default function ResearchPage() {
                           href={item.links.github} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-sm text-foreground hover:text-white transition-colors duration-200"
+                          className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                           onClick={(e) => e.stopPropagation()}
                         >
                           GitHub →
