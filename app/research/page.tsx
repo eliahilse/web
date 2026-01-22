@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 interface ResearchMetadata {
   title: string
@@ -56,12 +57,7 @@ export default function ResearchPage() {
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <Link 
-              href="/"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
-            >
-              ← Back to home
-            </Link>
+            <BackLink href="/" label="Back to home" />
             <h1 className="text-4xl font-bold text-foreground mb-4">Research</h1>
             <p className="text-lg text-muted-foreground">Technical papers, whitepapers, and academic work</p>
           </div>
@@ -78,7 +74,7 @@ export default function ResearchPage() {
                 }}
               >
                 <Link href={`/research/${item.slug}`} className="block group">
-                  <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
+                  <div className="bg-card-bg border border-card-border rounded-lg p-6 hover:border-card-border-hover hover:bg-card-bg-hover transition-all duration-200">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
                         <h2 className="text-xl font-semibold text-foreground mb-2">
@@ -140,7 +136,7 @@ export default function ResearchPage() {
                     {item.tags && item.tags.length > 0 && (
                       <div className="flex gap-2 flex-wrap mt-4">
                         {item.tags.map((tag) => (
-                          <span key={tag} className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80">
+                          <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                             {tag}
                           </span>
                         ))}

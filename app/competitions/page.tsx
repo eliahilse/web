@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 interface TeamMember {
   name: string
@@ -69,12 +70,7 @@ export default function CompetitionsPage() {
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <Link 
-              href="/"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
-            >
-              ← Back to home
-            </Link>
+            <BackLink href="/" label="Back to home" />
             <h1 className="text-4xl font-bold text-foreground mb-4">Competitions</h1>
             <p className="text-lg text-muted-foreground">Hackathons, contests, and competitive programming achievements</p>
           </div>
@@ -91,7 +87,7 @@ export default function CompetitionsPage() {
                 }}
               >
                 <Link href={`/competitions/${competition.slug}`} className="block group">
-                  <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
+                  <div className="bg-card-bg border border-card-border rounded-lg p-6 hover:border-card-border-hover hover:bg-card-bg-hover transition-all duration-200">
                     <div className="flex justify-between items-start mb-4">
                       <div>
                         <h2 className="text-xl font-semibold text-foreground mb-2">
@@ -131,7 +127,7 @@ export default function CompetitionsPage() {
                         {competition.video && (
                           <div className="aspect-video w-full">
                             <iframe
-                              className="w-full h-full rounded-md border border-white/10"
+                              className="w-full h-full rounded-md border border-card-border"
                               src={competition.video.replace('watch?v=', 'embed/')}
                               title={competition.title}
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

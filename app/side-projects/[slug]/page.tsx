@@ -5,7 +5,7 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 function formatPeriod(startDate: string, endDate: string): string {
   const formatDate = (d: string) => {
@@ -49,7 +49,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
         <div className="max-w-3xl mx-auto">
-          <Link href="/side-projects" className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block">← Back to side projects</Link>
+          <BackLink href="/side-projects" label="Back to side projects" />
           
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
@@ -69,7 +69,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
               {data.status && (
                 <>
                   <span>•</span>
-                  <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full capitalize">
+                  <span className="bg-tag text-foreground/70 text-xs px-3 py-1 rounded-full capitalize">
                     {String(data.status)}
                   </span>
                 </>
@@ -79,7 +79,7 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
                   <span>•</span>
                   <div className="flex gap-2 flex-wrap">
                     {data.tags.map((tag: string) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80">
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                         {tag}
                       </span>
                     ))}

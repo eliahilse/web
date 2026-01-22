@@ -65,12 +65,12 @@ export default function Home() {
               >
                 <Link
                   href={category.href}
-                  className="group w-full bg-white/7 border border-white/12 hover:border-white/20 hover:bg-white/9 transition-colors duration-200 rounded-md px-4 py-2 flex items-center justify-between"
+                  className="group w-full bg-card-bg border border-card-border hover:border-card-border-hover hover:bg-card-bg-hover transition-colors duration-200 rounded-md px-4 py-2 flex items-center justify-between"
                 >
                   <span className="text-foreground font-medium">
                     {category.name}
                   </span>
-                  <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full inline-flex items-center gap-1">
+                  <span className="bg-tag text-foreground/70 text-xs px-3 py-1 rounded-full inline-flex items-center gap-1">
                     {category.href === '#' ? 'coming soon' : (
                       <>
                         <span className="sr-only">open</span>

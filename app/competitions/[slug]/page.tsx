@@ -5,7 +5,7 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'competitions', `${slug}.mdx`)
@@ -36,7 +36,7 @@ export default async function CompetitionDetail({ params }: { params: Promise<{ 
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
         <div className="max-w-3xl mx-auto">
-          <Link href="/competitions" className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block">← Back to competitions</Link>
+          <BackLink href="/competitions" label="Back to competitions" />
           <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
           {data.description && (
             <p className="text-muted-foreground mb-6">{String(data.description)}</p>
@@ -49,7 +49,7 @@ export default async function CompetitionDetail({ params }: { params: Promise<{ 
                 {data.video && (
                   <div className="aspect-video w-full">
                     <iframe
-                      className="w-full h-full rounded-md border border-white/10"
+                      className="w-full h-full rounded-md border border-card-border"
                       src={String(data.video).replace('watch?v=', 'embed/')}
                       title={String(data.title ?? slug)}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

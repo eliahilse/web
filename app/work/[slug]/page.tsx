@@ -5,7 +5,7 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 function formatPeriod(startDate: string, endDate: string): string {
   const formatDate = (d: string) => {
@@ -46,9 +46,7 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
     <div className="min-h-screen flex flex-col justify-between p-8">
       <div className="flex-1">
         <div className="max-w-3xl mx-auto">
-          <Link href="/work" className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block">
-            ← Back to work
-          </Link>
+          <BackLink href="/work" label="Back to work" />
 
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">{String(data.title ?? slug)}</h1>
@@ -70,7 +68,7 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
             {data.tags && Array.isArray(data.tags) && data.tags.length > 0 && (
               <div className="flex gap-2 flex-wrap">
                 {data.tags.map((tag: string) => (
-                  <span key={tag} className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80">
+                  <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                     {tag}
                   </span>
                 ))}

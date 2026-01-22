@@ -26,6 +26,12 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-tag: var(--tag);
+  --color-card-bg: var(--card-bg);
+  --color-card-bg-hover: var(--card-bg-hover);
+  --color-card-border: var(--card-border);
+  --color-card-border-hover: var(--card-border-hover);
+  --color-dot: var(--dot);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -59,12 +65,18 @@
   --secondary: oklch(0.95 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.45 0 0);
+  --muted-foreground: oklch(0.35 0 0);
   --accent: oklch(0.95 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0 0 0 / 10%);
   --input: oklch(0 0 0 / 10%);
+  --tag: oklch(0 0 0 / 8%);
+  --card-bg: oklch(0 0 0 / 4%);
+  --card-bg-hover: oklch(0 0 0 / 6%);
+  --card-border: oklch(0 0 0 / 8%);
+  --card-border-hover: oklch(0 0 0 / 15%);
+  --dot: oklch(0 0 0 / 25%);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -93,12 +105,18 @@
   --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(0.87 0 0);
   --muted: oklch(0.22 0 0);
-  --muted-foreground: oklch(0.6 0 0);
+  --muted-foreground: oklch(0.7 0 0);
   --accent: oklch(0.22 0 0);
   --accent-foreground: oklch(0.87 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
+  --tag: oklch(1 0 0 / 10%);
+  --card-bg: oklch(1 0 0 / 5%);
+  --card-bg-hover: oklch(1 0 0 / 8%);
+  --card-border: oklch(1 0 0 / 10%);
+  --card-border-hover: oklch(1 0 0 / 20%);
+  --dot: oklch(1 0 0 / 30%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -201,4 +219,37 @@
 }
 .article-content strong {
   @apply text-foreground;
+}
+
+/* theme toggle view transition */
+.theme-toggle-icon {
+  view-transition-name: theme-icon;
+}
+
+::view-transition-old(theme-icon),
+::view-transition-new(theme-icon) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(theme-icon) {
+  animation-name: fade-and-scale-out;
+}
+
+::view-transition-new(theme-icon) {
+  animation-name: fade-and-scale-in;
+}
+
+@keyframes fade-and-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.8) rotate(90deg);
+  }
+}
+
+@keyframes fade-and-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-90deg);
+  }
 }

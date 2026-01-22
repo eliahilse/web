@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 
 interface ProjectMetadata {
   title: string
@@ -44,21 +45,13 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <Link
-              href="/"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
-            >
-              ← Back to home
-            </Link>
+            <BackLink href="/" label="Back to home" />
             <h1 className="text-4xl font-bold text-foreground mb-4">Side Projects</h1>
             <p className="text-lg text-muted-foreground">Personal ventures and experiments</p>
           </div>
 
           {/* Timeline */}
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[100px] top-0 bottom-0 w-px bg-white/10 hidden md:block" />
-
+          <div>
             {projects.map((project, index) => (
               <div
                 key={project.slug}
@@ -68,22 +61,17 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                   animationFillMode: 'both'
                 }}
               >
-                <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                <div className="flex flex-col md:flex-row md:gap-8">
                   {/* Date column */}
-                  <div className="md:w-[100px] flex-shrink-0 md:text-right">
+                  <div className="md:w-[120px] flex-shrink-0 md:text-right">
                     <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">
                       {formatPeriod(project.startDate, project.endDate)}
                     </span>
                   </div>
 
-                  {/* Timeline dot */}
-                  <div className="hidden md:flex items-start justify-center w-3 relative">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/30 mt-1.5" />
-                  </div>
-
                   {/* Content */}
                   <Link href={`/side-projects/${project.slug}`} className="flex-1 group">
-                    <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
+                    <div className="bg-card-bg border border-card-border rounded-lg p-6 hover:border-card-border-hover hover:bg-card-bg-hover transition-all duration-200">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
                         <h2 className="text-xl font-semibold text-foreground transition-colors">
                           {project.title}
@@ -95,7 +83,7 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                             </span>
                           )}
                           {project.status && (
-                            <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80 capitalize">
+                            <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80 capitalize">
                               {project.status}
                             </span>
                           )}
@@ -111,7 +99,7 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                       {project.tags && project.tags.length > 0 && (
                         <div className="flex gap-2 flex-wrap">
                           {project.tags.map((tag) => (
-                            <span key={tag} className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80">
+                            <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                               {tag}
                             </span>
                           ))}

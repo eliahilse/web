@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import BackLink from '@/components/BackLink'
 import { useRouter } from 'next/navigation'
 import { Funnel, MagnifyingGlass } from '@phosphor-icons/react'
 import {
@@ -68,12 +69,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <Link
-              href="/"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200 mb-6 inline-block"
-            >
-              ← Back to home
-            </Link>
+            <BackLink href="/" label="Back to home" />
             <h1 className="text-4xl font-bold text-foreground mb-4">Blog</h1>
             <p className="text-lg text-muted-foreground">Thoughts, experiences, and opinions</p>
           </div>
@@ -94,8 +90,8 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                     onClick={() => setSelectedCategory(cat)}
                     className={`text-xs px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
                       selectedCategory === cat
-                        ? 'bg-white/20 text-foreground'
-                        : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                        ? 'bg-card-border-hover text-foreground'
+                        : 'bg-card-bg text-muted-foreground hover:bg-tag'
                     }`}
                   >
                     {cat}
@@ -109,7 +105,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                   <button
                     onClick={() => setShowTagFilter(!showTagFilter)}
                     className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                      showTagFilter ? 'bg-white/20 text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-white/10'
+                      showTagFilter ? 'bg-card-border-hover text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-tag'
                     }`}
                     title="Filter by tags"
                   >
@@ -118,7 +114,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                 )}
                 <button
                   onClick={() => setSearchOpen(true)}
-                  className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                  className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-tag transition-all duration-200 cursor-pointer"
                   title="Search (⌘K)"
                 >
                   <MagnifyingGlass size={18} />
@@ -135,8 +131,8 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                     onClick={() => setSelectedTag(tag)}
                     className={`text-xs px-3 py-1.5 rounded transition-all duration-200 cursor-pointer ${
                       selectedTag === tag
-                        ? 'bg-white/20 text-foreground'
-                        : 'bg-white/10 text-foreground/80 hover:bg-white/15'
+                        ? 'bg-card-border-hover text-foreground'
+                        : 'bg-tag text-foreground/80 hover:bg-card-bg-hover'
                     }`}
                   >
                     {tag}
@@ -157,7 +153,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                   animationFillMode: 'both'
                 }}
               >
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 hover:bg-white/7 transition-all duration-200">
+                <div className="bg-card-bg border border-card-border rounded-lg p-6 hover:border-card-border-hover hover:bg-card-bg-hover transition-all duration-200">
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1">
@@ -169,7 +165,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                         )}
                       </div>
                       {post.category && (
-                        <span className="bg-white/10 text-foreground/70 text-xs px-3 py-1 rounded-full ml-4 whitespace-nowrap">
+                        <span className="bg-tag text-foreground/70 text-xs px-3 py-1 rounded-full ml-4 whitespace-nowrap">
                           {post.category}
                         </span>
                       )}
@@ -188,7 +184,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
                           <span>•</span>
                           <div className="flex gap-2 flex-wrap">
                             {post.tags.map((tag) => (
-                              <span key={tag} className="text-xs px-2 py-0.5 rounded bg-white/10 text-foreground/80">
+                              <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                                 {tag}
                               </span>
                             ))}
