@@ -58,7 +58,7 @@ export default function ResearchPage() {
             style={{ transitionDelay: '100ms' }}
           >
             <BackLink href="/" label="Back to home" />
-            <h1 className="text-4xl font-bold text-foreground mb-4">Research</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Research</h1>
             <p className="text-lg text-muted-foreground">Technical papers, whitepapers, and academic work</p>
           </div>
 

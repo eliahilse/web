@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { ArrowRight } from "@phosphor-icons/react";
 import { Link } from "next-view-transitions";
 
 export default function Home() {
@@ -71,7 +72,7 @@ export default function Home() {
             style={{ transitionDelay: "200ms" }}
           >
             <p className="text-lg text-muted-foreground">
-              Principal Software Engineer & Tech Lover
+              Principal Software Engineer <span className="font-inter">→</span> CTO
             </p>
           </div>
 
@@ -89,7 +90,7 @@ export default function Home() {
               >
                 <Link
                   href={category.href}
-                  className="group w-full bg-card-bg border border-card-border hover:border-card-border-hover hover:bg-card-bg-hover transition-colors duration-200 rounded-md px-4 py-2 flex items-center justify-between"
+                  className="group w-full bg-card-bg border border-card-border hover:border-card-border-hover hover:bg-card-bg-hover transition-colors duration-200 rounded-md pl-4 pr-3 py-2 flex items-center justify-between"
                 >
                   <span className="text-foreground font-medium">
                     {category.name}
@@ -100,9 +101,7 @@ export default function Home() {
                     ) : (
                       <>
                         <span className="sr-only">open</span>
-                        <span className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5">
-                          →
-                        </span>
+                        <ArrowRight size={12} className="inline-block transform transition-transform duration-200 group-hover:translate-x-0.5" />
                       </>
                     )}
                   </span>

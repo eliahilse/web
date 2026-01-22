@@ -6,7 +6,6 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from 'rehype-raw'
-import { Link } from 'next-view-transitions'
 import BackLink from '@/components/BackLink'
 
 async function getMdx(slug: string) {
@@ -45,7 +44,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
         <div className="page-container">
           <BackLink href="/blog" label="Back to blog" />
           
-          <div className="mb-6">
+          <div className="mb-8">
             <h1 className="text-4xl font-bold text-foreground mb-2 page-heading">{String(data.title ?? slug)}</h1>
             {data.description && (
               <p className="text-muted-foreground mb-3">{String(data.description)}</p>

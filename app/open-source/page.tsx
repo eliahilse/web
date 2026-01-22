@@ -51,7 +51,7 @@ export default function OpenSourcePage() {
             style={{ transitionDelay: '100ms' }}
           >
             <BackLink href="/" label="Back to home" />
-            <h1 className="text-4xl font-bold text-foreground mb-4">Open Source</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Open Source</h1>
             <p className="text-lg text-muted-foreground">Libraries and packages published for the community</p>
           </div>
 

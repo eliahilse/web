@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Inter, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import ThemeToggle from "@/components/ThemeToggle";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -50,7 +55,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${instrumentSans.variable} ${instrumentSerif.variable} ${geistMono.variable} antialiased`}
+          className={`${inter.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${geistMono.variable} font-sans antialiased`}
         >
           {children}
           <ThemeToggle />

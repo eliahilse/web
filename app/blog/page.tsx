@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
 import matter from 'gray-matter'
-import { Link } from 'next-view-transitions'
 import BlogClient from './BlogClient'
 
 interface BlogMetadata {

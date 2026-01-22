@@ -42,7 +42,7 @@ export default function WorkClient({ experiences }: { experiences: WorkMetadata[
             style={{ transitionDelay: '100ms' }}
           >
             <BackLink href="/" label="Back to home" />
-            <h1 className="text-4xl font-bold text-foreground mb-4">Work</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Work</h1>
             <p className="text-lg text-muted-foreground">Professional experience and roles</p>
           </div>
 

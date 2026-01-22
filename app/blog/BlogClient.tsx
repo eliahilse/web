@@ -70,7 +70,7 @@ export default function BlogClient({ posts, allCategories, allTags }: BlogClient
             style={{ transitionDelay: '100ms' }}
           >
             <BackLink href="/" label="Back to home" />
-            <h1 className="text-4xl font-bold text-foreground mb-4">Blog</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Blog</h1>
             <p className="text-lg text-muted-foreground">Thoughts, experiences, and opinions</p>
           </div>
 

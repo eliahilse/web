@@ -34,7 +34,7 @@ export default function AboutPage() {
           >
             <div className="prose dark:prose-invert max-w-none text-lg text-muted-foreground">
               <p className="">
-                Hi, I'm Elia - I'm obsessed with building software that
+                Hi, I&apos;m Elia - I&apos;m obsessed with building software that
                 performs, scales and solves problems.
               </p>
               <p>

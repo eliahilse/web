@@ -46,7 +46,7 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
             style={{ transitionDelay: '100ms' }}
           >
             <BackLink href="/" label="Back to home" />
-            <h1 className="text-4xl font-bold text-foreground mb-4">Side Projects</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Side Projects</h1>
             <p className="text-lg text-muted-foreground">Personal ventures and experiments</p>
           </div>
 
