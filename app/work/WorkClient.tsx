@@ -59,7 +59,7 @@ export default function WorkClient({ experiences }: { experiences: WorkMetadata[
               >
                 <div className="flex flex-col md:flex-row md:gap-8">
                   {/* Date column */}
-                  <div className="md:w-[120px] flex-shrink-0 md:text-right">
+                  <div className="pb-2 md:pb-0 md:w-[120px] flex-shrink-0 md:text-right">
                     <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">
                       {formatPeriod(exp.startDate, exp.endDate)}
                     </span>

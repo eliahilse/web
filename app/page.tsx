@@ -131,6 +131,7 @@ export default function Home() {
               aria-label={link.label}
             >
               {link.type === "custom" ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={link.src}
                   alt={link.label}
