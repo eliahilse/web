@@ -34,13 +34,28 @@ export default function AboutPage() {
           >
             <div className="prose dark:prose-invert max-w-none text-lg text-muted-foreground">
               <p className="">
-                Hi, I&apos;m Elia - I&apos;m obsessed with building software that
-                performs, scales and solves problems.
+                Hi, I&apos;m Elia - I&apos;m obsessed with building software
+                that performs, scales and solves problems.
               </p>
               <p>
                 My love for building things started at age 14, when I launched
-                an automated botting panel, processed 100k+ orders and then got
-                sued for not being GDPR compliant.
+                an automated botting panel (instant followers, likes and views
+                from the best farms during the renaissance of botting - TikTok
+                views cost 0.0001$/1k at the time). My panel processed 100k+
+                orders, was relied on by major industry players - and got me
+                sued for not fully being GDPR compliant.
+              </p>
+              <p>
+                Since around that time I've basically spent all my free time
+                tinkering with software and hardware (for a while at the time I
+                also built, sold and repaired desktop PCs).
+              </p>
+              <p>
+                I love to dive deep into anything really, never give up on
+                finding solutions (sometimes sacrificing sleep) - and my
+                dopamine spikes when seeing traffic hitting infrastructures,
+                seeing performance optimizations take effect, or processes
+                clicking seamlessly.
               </p>
             </div>
           </div>
