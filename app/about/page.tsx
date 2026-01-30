@@ -2,12 +2,18 @@
 
 import { useEffect, useState } from "react";
 import BackLink from "@/components/BackLink";
+import { calculateAge, LOCATION } from "@/lib/config";
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [age, setAge] = useState(calculateAge);
 
   useEffect(() => {
     setIsLoaded(true);
+    const interval = setInterval(() => {
+      setAge(calculateAge());
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -27,10 +33,25 @@ export default function AboutPage() {
           </div>
 
           <div
+            className={`mb-8 flex flex-col sm:flex-row sm:gap-8 gap-2 text-sm text-muted-foreground font-mono transform transition-all duration-700 ease-out ${
+              isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+            style={{ transitionDelay: "150ms" }}
+          >
+            <div>
+              <span className="text-foreground/60">age:</span>{" "}
+              {age.years}y {age.days}d {age.seconds.toLocaleString("en-US")}s
+            </div>
+            <div>
+              <span className="text-foreground/60">location:</span> {LOCATION}
+            </div>
+          </div>
+
+          <div
             className={`space-y-6 transform transition-all duration-700 ease-out ${
               isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
-            style={{ transitionDelay: "200ms" }}
+            style={{ transitionDelay: "250ms" }}
           >
             <div className="prose dark:prose-invert max-w-none text-lg text-muted-foreground">
               <p className="">

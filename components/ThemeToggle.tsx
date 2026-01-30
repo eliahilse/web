@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Moon, SunDim } from "@phosphor-icons/react";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const iconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -15,8 +16,9 @@ export default function ThemeToggle() {
   const toggleTheme = () => {
     const newIsDark = !isDark;
 
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
+    if (document.startViewTransition && iconRef.current) {
+      iconRef.current.classList.add("theme-toggle-transitioning");
+      const transition = document.startViewTransition(() => {
         setIsDark(newIsDark);
         if (newIsDark) {
           document.documentElement.classList.add("dark");
@@ -25,6 +27,9 @@ export default function ThemeToggle() {
           document.documentElement.classList.remove("dark");
           localStorage.setItem("theme", "light");
         }
+      });
+      transition.finished.then(() => {
+        iconRef.current?.classList.remove("theme-toggle-transitioning");
       });
     } else {
       setIsDark(newIsDark);
@@ -46,7 +51,7 @@ export default function ThemeToggle() {
       className="fixed bottom-6 right-6 p-3 cursor-pointer z-50 text-foreground"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
-      <div className="theme-toggle-icon">
+      <div ref={iconRef} className="theme-toggle-icon">
         {isDark ? (
           <SunDim size={22} weight="fill" className="scale-125" />
         ) : (

@@ -10,6 +10,7 @@ interface Package {
   url: string
   github?: string
   downloads?: string
+  role: 'maintainer' | 'contributor'
 }
 
 export default function OpenSourcePage() {
@@ -25,18 +26,21 @@ export default function OpenSourcePage() {
       description: 'Globally distributed intelligent load balancer on top of Cloudflare Workers',
       registry: 'npm',
       url: 'https://www.npmjs.com/package/hyperfly',
+      role: 'maintainer',
     },
     {
       name: 'kyora',
       description: 'CLI utility for AI-assisted Solana validator setup and maintenance',
       registry: 'npm',
       url: 'https://www.npmjs.com/package/kyora',
+      role: 'maintainer',
     },
     {
       name: 'solanace',
       description: 'High-level Python library for interacting with the Solana blockchain',
       registry: 'pypi',
       url: 'https://pypi.org/project/solanace/',
+      role: 'maintainer',
     },
   ]
 
@@ -75,11 +79,16 @@ export default function OpenSourcePage() {
                         {pkg.registry}
                       </span>
                     </div>
-                    {pkg.downloads && (
-                      <span className="text-xs text-muted-foreground">
-                        {pkg.downloads} downloads
+                    <div className="flex items-center gap-3">
+                      {pkg.downloads && (
+                        <span className="text-xs text-muted-foreground">
+                          {pkg.downloads} downloads
+                        </span>
+                      )}
+                      <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80 capitalize">
+                        {pkg.role}
                       </span>
-                    )}
+                    </div>
                   </div>
 
                   <p className="text-muted-foreground text-sm mb-4">

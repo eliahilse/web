@@ -79,6 +79,8 @@
   --card-border: oklch(0 0 0 / 8%);
   --card-border-hover: oklch(0 0 0 / 15%);
   --dot: oklch(0 0 0 / 25%);
+  --scrollbar-thumb: oklch(0 0 0 / 20%);
+  --scrollbar-thumb-hover: oklch(0 0 0 / 35%);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -119,6 +121,8 @@
   --card-border: oklch(1 0 0 / 10%);
   --card-border-hover: oklch(1 0 0 / 20%);
   --dot: oklch(1 0 0 / 30%);
+  --scrollbar-thumb: oklch(1 0 0 / 20%);
+  --scrollbar-thumb-hover: oklch(1 0 0 / 35%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -142,6 +146,28 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* scrollbar - minimal, theme-aware, overlay */
+html, body {
+  overflow: overlay;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 .page-container {
@@ -227,8 +253,8 @@
   @apply text-foreground;
 }
 
-/* theme toggle view transition */
-.theme-toggle-icon {
+/* theme toggle view transition - only during theme toggle, not page nav */
+.theme-toggle-icon.theme-toggle-transitioning {
   view-transition-name: theme-icon;
 }
 
