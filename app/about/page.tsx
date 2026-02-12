@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import BackLink from "@/components/BackLink";
 import { calculateAge, LOCATION } from "@/lib/config";
+import { ArrowSquareOut } from "@phosphor-icons/react";
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,7 +18,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-8">
+    <div className="min-h-screen flex flex-col justify-between p-8 pb-32">
       <div className="flex-1">
         <div className="page-container">
           <div
@@ -44,6 +45,11 @@ export default function AboutPage() {
             </div>
             <div>
               <span className="text-foreground/60">location:</span> {LOCATION}
+            </div>
+            <div>
+              <a href="https://raw.githubusercontent.com/eliahilse/cv/main/cv.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                <span className="text-foreground/60">cv:</span> pdf <ArrowSquareOut className="inline-block ml-0.5 -mt-0.5" size={12} />
+              </a>
             </div>
           </div>
 
