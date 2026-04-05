@@ -5,43 +5,43 @@ import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
 import { ArrowRight } from "@phosphor-icons/react";
 import { Link } from "next-view-transitions";
 
+const socialLinks = [
+  {
+    type: "custom" as const,
+    src: "/img/linkedin.svg",
+    href: "https://www.linkedin.com/in/eliahilse",
+    label: "LinkedIn",
+  },
+  {
+    type: "icon" as const,
+    icon: SiGithub,
+    href: "https://github.com/eliahilse",
+    label: "GitHub",
+  },
+  {
+    type: "icon" as const,
+    icon: SiX,
+    href: "https://x.com/eliahilse",
+    label: "X",
+  },
+];
+
+const categories = [
+  { name: "about", href: "/about" },
+  { name: "work", href: "/work" },
+  { name: "side projects", href: "/side-projects" },
+  { name: "open source", href: "/open-source" },
+  { name: "competitions", href: "/competitions" },
+  { name: "research", href: "/research" },
+  { name: "blog", href: "/blog" },
+];
+
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-
-  const socialLinks = [
-    {
-      type: "custom" as const,
-      src: "/img/linkedin.svg",
-      href: "https://www.linkedin.com/in/eliahilse",
-      label: "LinkedIn",
-    },
-    {
-      type: "icon" as const,
-      icon: SiGithub,
-      href: "https://github.com/eliahilse",
-      label: "GitHub",
-    },
-    {
-      type: "icon" as const,
-      icon: SiX,
-      href: "https://x.com/eliahilse",
-      label: "X",
-    },
-  ];
-
-  const categories = [
-    { name: "about", href: "/about" },
-    { name: "work", href: "/work" },
-    { name: "side projects", href: "/side-projects" },
-    { name: "open source", href: "/open-source" },
-    { name: "competitions", href: "/competitions" },
-    { name: "research", href: "/research" },
-    { name: "blog", href: "/blog" },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8 relative">
