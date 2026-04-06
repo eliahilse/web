@@ -13,33 +13,23 @@ export default function ThemeToggle() {
     setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
+  const applyTheme = (dark: boolean) => {
+    setIsDark(dark);
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  };
+
   const toggleTheme = () => {
     const newIsDark = !isDark;
 
     if (document.startViewTransition && iconRef.current) {
       iconRef.current.classList.add("theme-toggle-transitioning");
-      const transition = document.startViewTransition(() => {
-        setIsDark(newIsDark);
-        if (newIsDark) {
-          document.documentElement.classList.add("dark");
-          localStorage.setItem("theme", "dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-          localStorage.setItem("theme", "light");
-        }
-      });
+      const transition = document.startViewTransition(() => applyTheme(newIsDark));
       transition.finished.then(() => {
         iconRef.current?.classList.remove("theme-toggle-transitioning");
       });
     } else {
-      setIsDark(newIsDark);
-      if (newIsDark) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
+      applyTheme(newIsDark);
     }
   };
 
