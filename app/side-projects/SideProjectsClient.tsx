@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'next-view-transitions'
 import BackLink from '@/components/BackLink'
+import { formatPeriod } from '@/lib/utils'
 
 interface ProjectMetadata {
   title: string
@@ -13,18 +14,6 @@ interface ProjectMetadata {
   returns?: string
   tags?: string[]
   slug: string
-}
-
-function formatPeriod(startDate: string, endDate: string): string {
-  const formatDate = (d: string) => {
-    const [year, month] = d.split('-')
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return `${months[parseInt(month, 10) - 1]} ${year}`
-  }
-  const start = formatDate(startDate)
-  const end = formatDate(endDate)
-  if (start === end) return start
-  return `${start} – ${end}`
 }
 
 export default function SideProjectsClient({ projects }: { projects: ProjectMetadata[] }) {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'next-view-transitions'
 import BackLink from '@/components/BackLink'
+import { formatPeriod } from '@/lib/utils'
 
 interface WorkMetadata {
   title: string
@@ -12,15 +13,6 @@ interface WorkMetadata {
   endDate: string
   tags?: string[]
   slug: string
-}
-
-function formatPeriod(startDate: string, endDate: string): string {
-  const formatDate = (d: string) => {
-    const [year, month] = d.split('-')
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return `${months[parseInt(month, 10) - 1]} ${year}`
-  }
-  return `${formatDate(startDate)} – ${formatDate(endDate)}`
 }
 
 export default function WorkClient({ experiences }: { experiences: WorkMetadata[] }) {
