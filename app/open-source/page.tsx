@@ -13,36 +13,36 @@ interface Package {
   role: 'maintainer' | 'contributor'
 }
 
+const packages: Package[] = [
+  {
+    name: 'hyperfly',
+    description: 'Globally distributed intelligent load balancer on top of Cloudflare Workers',
+    registry: 'npm',
+    url: 'https://www.npmjs.com/package/hyperfly',
+    role: 'maintainer',
+  },
+  {
+    name: 'kyora',
+    description: 'CLI utility for AI-assisted Solana validator setup and maintenance',
+    registry: 'npm',
+    url: 'https://www.npmjs.com/package/kyora',
+    role: 'maintainer',
+  },
+  {
+    name: 'solanace',
+    description: 'High-level Python library for interacting with the Solana blockchain',
+    registry: 'pypi',
+    url: 'https://pypi.org/project/solanace/',
+    role: 'maintainer',
+  },
+]
+
 export default function OpenSourcePage() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     setIsLoaded(true)
   }, [])
-
-  const packages: Package[] = [
-    {
-      name: 'hyperfly',
-      description: 'Globally distributed intelligent load balancer on top of Cloudflare Workers',
-      registry: 'npm',
-      url: 'https://www.npmjs.com/package/hyperfly',
-      role: 'maintainer',
-    },
-    {
-      name: 'kyora',
-      description: 'CLI utility for AI-assisted Solana validator setup and maintenance',
-      registry: 'npm',
-      url: 'https://www.npmjs.com/package/kyora',
-      role: 'maintainer',
-    },
-    {
-      name: 'solanace',
-      description: 'High-level Python library for interacting with the Solana blockchain',
-      registry: 'pypi',
-      url: 'https://pypi.org/project/solanace/',
-      role: 'maintainer',
-    },
-  ]
 
   return (
     <div className="min-h-screen flex flex-col justify-between p-8">
