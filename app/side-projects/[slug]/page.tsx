@@ -6,18 +6,7 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import BackLink from '@/components/BackLink'
-
-function formatPeriod(startDate: string, endDate: string): string {
-  const formatDate = (d: string) => {
-    const [year, month] = d.split('-')
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return `${months[parseInt(month, 10) - 1]} ${year}`
-  }
-  const start = formatDate(startDate)
-  const end = formatDate(endDate)
-  if (start === end) return start
-  return `${start} – ${end}`
-}
+import { formatPeriod } from '@/lib/utils'
 
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'side-projects', `${slug}.mdx`)
