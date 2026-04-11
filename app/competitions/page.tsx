@@ -25,61 +25,58 @@ interface CompetitionMetadata {
   video?: string; // URL to YouTube or other video
 }
 
+const competitions: CompetitionMetadata[] = [
+  {
+    title: "Synapse",
+    pitch: "",
+    demo: "https://synapse.elia.vc",
+    github: "https://github.com/synapsedotai/synapse",
+    hackathon: "CDTM x Anthropic Hackathon (ft. Elevenlabs, Lovable)",
+    placement: "2nd (jury debated 1h)",
+    location: "Munich, DE",
+    track: "Visionaries Club",
+    team: [
+      { name: "Elia Hilse", linkedin: "https://linkedin.com/in/eliahilse" },
+      {
+        name: "Jan Tokic",
+        linkedin: "https://www.linkedin.com/in/jan-tokic",
+      },
+      {
+        name: "Jan Jürgens",
+        linkedin: "https://www.linkedin.com/in/janjuergens1/",
+      },
+      {
+        name: "Johannes Schwab",
+        linkedin: "https://www.linkedin.com/in/johannes-nic-schwab/",
+      },
+      {
+        name: "Johannes Brix",
+        linkedin: "https://www.linkedin.com/in/johannesbrix/",
+      },
+    ],
+    date: "2024-01-15",
+    slug: "synapse",
+    description:
+      "Built Synapse: a self-learning knowledge system identifying internal experts and surfacing management insights across an organization.",
+    video: "https://www.youtube.com/watch?v=H_io8qfVFmg",
+  },
+  {
+    title: "ev.io UI Redesign",
+    hackathon: "ev.io UI Redesign Competition",
+    placement: "1st - $10k in NFTs",
+    location: "Online",
+    date: "2022-09-01",
+    slug: "evio-ui-redesign",
+    description:
+      "Redesigned the UI for ev.io, a web-based online FPS game with ~100k MAUs that was active in the web3 space at the time.",
+    video: "https://www.youtube.com/watch?v=w6Xw6vkJv1w",
+  },
+];
+
 export default function CompetitionsPage() {
-  const [competitions, setCompetitions] = useState<CompetitionMetadata[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Mock data - in production this would fetch from an API route
-    const mockCompetitions: CompetitionMetadata[] = [
-      {
-        title: "Synapse",
-        pitch: "",
-        demo: "https://synapse.elia.vc",
-        github: "https://github.com/synapsedotai/synapse",
-        hackathon: "CDTM x Anthropic Hackathon (ft. Elevenlabs, Lovable)",
-        placement: "2nd (jury debated 1h)",
-        location: "Munich, DE",
-        track: "Visionaries Club",
-        team: [
-          { name: "Elia Hilse", linkedin: "https://linkedin.com/in/eliahilse" },
-          {
-            name: "Jan Tokic",
-            linkedin: "https://www.linkedin.com/in/jan-tokic",
-          },
-          {
-            name: "Jan Jürgens",
-            linkedin: "https://www.linkedin.com/in/janjuergens1/",
-          },
-          {
-            name: "Johannes Schwab",
-            linkedin: "https://www.linkedin.com/in/johannes-nic-schwab/",
-          },
-          {
-            name: "Johannes Brix",
-            linkedin: "https://www.linkedin.com/in/johannesbrix/",
-          },
-        ],
-        date: "2024-01-15",
-        slug: "synapse",
-        description:
-          "Built Synapse: a self-learning knowledge system identifying internal experts and surfacing management insights across an organization.",
-        video: "https://www.youtube.com/watch?v=H_io8qfVFmg",
-      },
-      {
-        title: "ev.io UI Redesign",
-        hackathon: "ev.io UI Redesign Competition",
-        placement: "1st - $10k in NFTs",
-        location: "Online",
-        date: "2022-09-01",
-        slug: "evio-ui-redesign",
-        description:
-          "Redesigned the UI for ev.io, a web-based online FPS game with ~100k MAUs that was active in the web3 space at the time.",
-        video: "https://www.youtube.com/watch?v=w6Xw6vkJv1w",
-      },
-    ];
-
-    setCompetitions(mockCompetitions);
     setIsLoaded(true);
   }, []);
 
