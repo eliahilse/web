@@ -20,29 +20,27 @@ interface ResearchMetadata {
   slug: string
 }
 
+const research: ResearchMetadata[] = [
+  {
+    title: "BunkerCoin: A Low Bandwidth, Shortwave Radio-Compatible Blockchain Protocol",
+    description: "Novel L1 blockchain protocol designed to operate over shortwave radio with custom consensus mechanism (Alpenglow), location-aware routing (Sherpa), and native offline messaging. Co-authored with Solana co-founder Anatoly Yakovenko.",
+    date: "2025-08-07",
+    tags: ["blockchain", "distributed-systems", "radio", "consensus"],
+    status: "active-research",
+    authors: ["Elia Hilse (sole implementation & primary author)", "Anatoly Yakovenko (core concepts & advisor)"],
+    links: {
+      whitepaper: "https://bunkercoin.com/view?file=technical-whitepaper",
+      website: "https://bunkercoin.com",
+      github: "https://github.com/TheBunkerCoin/bunker_coin"
+    },
+    slug: "bunkercoin-whitepaper"
+  }
+]
+
 export default function ResearchPage() {
-  const [research, setResearch] = useState<ResearchMetadata[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    const mockResearch: ResearchMetadata[] = [
-      {
-        title: "BunkerCoin: A Low Bandwidth, Shortwave Radio-Compatible Blockchain Protocol",
-        description: "Novel L1 blockchain protocol designed to operate over shortwave radio with custom consensus mechanism (Alpenglow), location-aware routing (Sherpa), and native offline messaging. Co-authored with Solana co-founder Anatoly Yakovenko.",
-        date: "2025-08-07",
-        tags: ["blockchain", "distributed-systems", "radio", "consensus"],
-        status: "active-research",
-        authors: ["Elia Hilse (sole implementation & primary author)", "Anatoly Yakovenko (core concepts & advisor)"],
-        links: {
-          whitepaper: "https://bunkercoin.com/view?file=technical-whitepaper",
-          website: "https://bunkercoin.com",
-          github: "https://github.com/TheBunkerCoin/bunker_coin"
-        },
-        slug: "bunkercoin-whitepaper"
-      }
-    ]
-    
-    setResearch(mockResearch)
     setIsLoaded(true)
   }, [])
 
