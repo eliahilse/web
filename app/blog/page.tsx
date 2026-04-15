@@ -21,21 +21,20 @@ async function getBlogPosts(): Promise<BlogMetadata[]> {
     return []
   }
   const mdxFiles = files.filter(f => f.endsWith('.mdx'))
-  const entries: BlogMetadata[] = []
-  for (const file of mdxFiles) {
+  const entries = await Promise.all(mdxFiles.map(async (file) => {
     const filepath = path.join(dir, file)
     const raw = await fs.readFile(filepath, 'utf8')
     const { data } = matter(raw)
     const slug = file.replace(/\.mdx$/, '')
-    entries.push({
+    return {
       title: data.title ?? slug,
       description: data.description,
       date: data.date ?? '1970-01-01',
       tags: data.tags,
       category: data.category,
       slug,
-    })
-  }
+    } as BlogMetadata
+  }))
   // Newest first
   entries.sort((a, b) => (a.date < b.date ? 1 : -1))
   return entries
