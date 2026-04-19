@@ -21,10 +21,11 @@ async function getBlogPosts(): Promise<BlogMetadata[]> {
     return []
   }
   const mdxFiles = files.filter(f => f.endsWith('.mdx'))
-  const entries = await Promise.all(mdxFiles.map(async (file) => {
+  const entries = (await Promise.all(mdxFiles.map(async (file) => {
     const filepath = path.join(dir, file)
     const raw = await fs.readFile(filepath, 'utf8')
     const { data } = matter(raw)
+    if (data.published === false) return null
     const slug = file.replace(/\.mdx$/, '')
     return {
       title: data.title ?? slug,
@@ -34,7 +35,7 @@ async function getBlogPosts(): Promise<BlogMetadata[]> {
       category: data.category,
       slug,
     } as BlogMetadata
-  }))
+  }))).filter((e): e is BlogMetadata => e !== null)
   // Newest first
   entries.sort((a, b) => (a.date < b.date ? 1 : -1))
   return entries
