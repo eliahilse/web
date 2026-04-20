@@ -6,7 +6,7 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from 'rehype-raw'
-import BackLink from '@/components/BackLink'
+import BlogPostContent from './BlogPostContent'
 
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'blog', `${slug}.mdx`)
@@ -38,46 +38,16 @@ export async function generateStaticParams() {
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const { data, html } = await getMdx(slug)
-  return (
-    <div className="min-h-screen flex flex-col justify-between p-8">
-      <div className="flex-1">
-        <div className="page-container">
-          <BackLink href="/blog" label="Back to blog" />
-          
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2 page-heading">{String(data.title ?? slug)}</h1>
-            {data.description && (
-              <p className="text-muted-foreground mb-3">{String(data.description)}</p>
-            )}
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              {data.date && (
-                <time dateTime={String(data.date)}>
-                  {new Date(String(data.date)).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              )}
-              {data.tags && Array.isArray(data.tags) && data.tags.length > 0 && (
-                <>
-                  <span>•</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {data.tags.map((tag: string) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
 
-          <article className="article-content" dangerouslySetInnerHTML={{ __html: html }} />
-        </div>
-      </div>
-    </div>
+  return (
+    <BlogPostContent
+      title={String(data.title ?? slug)}
+      description={data.description ? String(data.description) : undefined}
+      date={data.date ? String(data.date) : undefined}
+      tags={Array.isArray(data.tags) ? data.tags : undefined}
+      html={html}
+      published={data.published !== false}
+      shareKey={data.shareKey ? String(data.shareKey) : undefined}
+    />
   )
 }
-

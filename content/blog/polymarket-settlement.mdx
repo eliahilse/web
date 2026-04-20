@@ -4,5 +4,55 @@ description: "It's surprisingly easy to frontrun Polymarket's settlement logic, 
 date: "2026-04-19"
 tags: ["technical", "security", "web3", "defi"]
 category: "technical"
-published: true
+published: false
+shareKey: "pm-settle-0x4f"
 ---
+
+Recently, when coming across Polymarket's new 5/15 minute markets for BTC, ETH and SOL, one question formed: "How do they settle on Polygon for such time-constrained markets?".
+
+## Introduction
+
+For people not affiliated with prediction markets, Polymarket recently launched short-timeframe binary markets to whether Bitcoin and other crypto-currencies would go "up or down" in short time-frames (e.g. 5 minutes).
+
+Buying e.g. "up" initially at 50c, Bitcoin after 5 minutes price-wise being above the initial price, the market would resolve to "up", returning 100c (and vice versa).
+
+Bitcoin being a pretty volatile market, swinging often into many directions even short-term, this is pretty different from Polymarkets usual rather longer-term markets (e.g. whether X would happen within the next month(s)).
+
+Milliseconds matter - and that's exactly where it gets interesting, since Polymarket settles on Polygon, a blockchain with block-times of 2 seconds.
+
+For people not affiliated with blockchains, every blockchain achieves periodic consensus of decentralized network-participants (nodes). That consensus (which transactions are valid), is then written into an immutable block (think of it as an append-only database).
+
+Important is the order of transactions in each block - the order matters, transactions are "executed" in order. I.e. if the first transaction in a block makes a later one impossible (e.g. User A sends his tokens to destination A in transaction x, and then tries to send his tokens to destination B in transaction y), the latter one (transaction y) will fail.
+
+Polymarket operates on a hybrid model. They have an order-book which lives off-chain on their infra, and matched orders are then later settled (they call it "mined") on-chain.
+
+## The Exploit
+
+You probably see where I'm trying to go. Users can submit orders to Polymarket's orderbook, and, as long as they're quick enough, back out of these "matched" ones, if they manage to frontrun Polymarket's settlement.
+
+In other words - users can enter trades, and if not winning within ~1s on avg, back out of these trades by paying higher gas on any transactions invalidating Polymarket's settlement - a fundamental flaw.
+
+While sounding very trivial, it's still effectively a very time-sensitive matter.
+Polymarkets orderbook takes ~250ms to match market-orders (tested from the closest AWS region they allow traffic from) - and even when running one's own RPC node to have minimal latency, submitting a transaction will still take ~150ms. Add a 500ms safety buffer, that leaves a time-window of about 1.2s for entering and exiting trades - from the start of the last confirmed polygon block.
+
+## Proof of Concept
+
+Below a sample of exploitation.
+
+Here's the transaction of entering a trade (UP BTC after it chunked up 50ms prior) - totally regular, as any other Polymarket user.
+
+Here's us backing out of it (moving funds away) - important is to exceed their gas, during testing timeframe they usually settled with ~1k GWEI - 3xing the recommended priority gas based on on-chain data should do.
+
+And here's the failed settlement TX from Polymarket
+
+
+## Mitigation
+
+Mitigation would actually be quite simple - Polymarket could upgrade their contract to hold user funds escrow with a minimum lock time of a few blocks (i.e. on entering trades, users can't move funds for 2 blocks).
+
+This exploit got flagged to Polymarket's engineering team, and afaik will be fixed in their upcoming contract upgrade, worst case once they roll out their own chain.
+
+Why they didn't do this in the first place?
+I assume the current version was not built with extremely time-sensitive markets in mind, where sub-second trades can create meaningful exploit windows.
+
+With the introduction of said 5/15 minute markets and also sport markets, there's ample attack surface though (e.g. BTC moving up by $200 in 100ms, moving it above the initial price from below, or a goal being scored in a soccer match).
