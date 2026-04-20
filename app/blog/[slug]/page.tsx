@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import fs from 'fs/promises'
 import path from 'path'
 import matter from 'gray-matter'
@@ -40,14 +41,16 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
   const { data, html } = await getMdx(slug)
 
   return (
-    <BlogPostContent
-      title={String(data.title ?? slug)}
-      description={data.description ? String(data.description) : undefined}
-      date={data.date ? String(data.date) : undefined}
-      tags={Array.isArray(data.tags) ? data.tags : undefined}
-      html={html}
-      published={data.published !== false}
-      shareKey={data.shareKey ? String(data.shareKey) : undefined}
-    />
+    <Suspense>
+      <BlogPostContent
+        title={String(data.title ?? slug)}
+        description={data.description ? String(data.description) : undefined}
+        date={data.date ? String(data.date) : undefined}
+        tags={Array.isArray(data.tags) ? data.tags : undefined}
+        html={html}
+        published={data.published !== false}
+        shareKey={data.shareKey ? String(data.shareKey) : undefined}
+      />
+    </Suspense>
   )
 }
