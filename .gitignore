@@ -22,6 +22,9 @@
 .dev.vars
 .wrangler/
 
+# generated
+/lib/markets/positions.generated.ts
+
 # production
 /build
 

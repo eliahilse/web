@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "bun run positions:gen",
     "dev": "next dev --turbopack",
+    "prebuild": "bun run positions:gen",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "positions:gen": "bun run scripts/build-positions.ts",
+    "prices:resolve": "bun run scripts/resolve-prices.ts",
+    "preview": "bun run positions:gen && opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "bun run positions:gen && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {

@@ -10,5 +10,11 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CACHE_KV",
+      "id": "8ff94b78ce55453badbe906516e25ec7"
+    }
+  ]
 }
