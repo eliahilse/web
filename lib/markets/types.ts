@@ -6,38 +6,46 @@ export type Quote = {
   history: HistoryPoint[]
 }
 
-export type StockPosition = {
-  kind: 'stock'
+export type EventKind = 'entry' | 'update' | 'change' | 'exit'
+
+export type PositionEvent = {
+  date: string
+  kind: EventKind
+  tldr: string
+  html: string
+}
+
+type Common = {
   id: string
-  symbol: string
-  name: string
-  entryPrice: number
+  intro?: string
+  events: PositionEvent[]
   entryDate: string
-  exitPrice?: number
   exitDate?: string
 }
 
-export type CryptoPosition = {
+export type StockPosition = Common & {
+  kind: 'stock'
+  symbol: string
+  name: string
+  entryPrice: number
+  exitPrice?: number
+}
+
+export type CryptoPosition = Common & {
   kind: 'crypto'
-  id: string
   symbol: string
   coingeckoId: string
   name: string
   entryPrice: number
-  entryDate: string
   exitPrice?: number
-  exitDate?: string
 }
 
-export type PrivatePosition = {
+export type PrivatePosition = Common & {
   kind: 'private'
-  id: string
   name: string
   entryValuation: number
   currentValuation: number
-  entryDate: string
   exitValuation?: number
-  exitDate?: string
 }
 
 export type Position = StockPosition | CryptoPosition | PrivatePosition

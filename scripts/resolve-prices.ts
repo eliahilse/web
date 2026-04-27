@@ -1,4 +1,4 @@
-import { readPositions, readPrices, writePrices, type PriceLock } from './positions-shared'
+import { readPositions, readPrices, writePrices, findEventDate, type PriceLock } from './positions-shared'
 
 const TRADING_DAY_WINDOW = 7
 
@@ -36,8 +36,15 @@ async function main() {
   const prices = await readPrices()
   let changed = 0
 
-  for (const { id, data } of positions) {
+  for (const { id, data, events } of positions) {
     if (data.kind === 'private') continue
+    const entryDate = findEventDate(events, 'entry')
+    const exitDate = findEventDate(events, 'exit')
+    if (!entryDate) {
+      console.warn(`✗ ${id}: no entry event`)
+      continue
+    }
+
     const lock: PriceLock = prices[id] ?? {}
     const symbolOrId = data.kind === 'stock' ? data.symbol : data.coingeckoId
     if (!symbolOrId) {
@@ -49,31 +56,31 @@ async function main() {
       ? (date: string) => fetchStockCloseOnOrAfter(data.symbol!, date)
       : (date: string) => fetchCryptoCloseOn(data.coingeckoId!, date)
 
-    if (lock.entryPrice == null && data.entryDate) {
+    if (lock.entryPrice == null) {
       try {
-        const { price, dateUsed } = await fetcher(data.entryDate)
+        const { price, dateUsed } = await fetcher(entryDate)
         lock.entryPrice = price
         lock.entryDateUsed = dateUsed
-        console.log(`✓ ${id} entry: $${price.toFixed(2)} on ${dateUsed}${dateUsed !== data.entryDate ? ` (requested ${data.entryDate})` : ''}`)
+        console.log(`✓ ${id} entry: $${price.toFixed(2)} on ${dateUsed}${dateUsed !== entryDate ? ` (requested ${entryDate})` : ''}`)
         changed++
       } catch (err) {
         console.error(`✗ ${id} entry: ${(err as Error).message}`)
       }
     }
 
-    if (data.exitDate && lock.exitPrice == null) {
+    if (exitDate && lock.exitPrice == null) {
       try {
-        const { price, dateUsed } = await fetcher(data.exitDate)
+        const { price, dateUsed } = await fetcher(exitDate)
         lock.exitPrice = price
         lock.exitDateUsed = dateUsed
-        console.log(`✓ ${id} exit:  $${price.toFixed(2)} on ${dateUsed}${dateUsed !== data.exitDate ? ` (requested ${data.exitDate})` : ''}`)
+        console.log(`✓ ${id} exit:  $${price.toFixed(2)} on ${dateUsed}${dateUsed !== exitDate ? ` (requested ${exitDate})` : ''}`)
         changed++
       } catch (err) {
         console.error(`✗ ${id} exit:  ${(err as Error).message}`)
       }
     }
 
-    if (!data.exitDate && lock.exitPrice != null) {
+    if (!exitDate && lock.exitPrice != null) {
       delete lock.exitPrice
       delete lock.exitDateUsed
       changed++
@@ -85,7 +92,7 @@ async function main() {
   for (const id of Object.keys(prices)) {
     if (!positions.find((p) => p.id === id)) {
       delete prices[id]
-      console.log(`- ${id}: removed (no MDX)`)
+      console.log(`- ${id}: removed (no position dir)`)
       changed++
     }
   }

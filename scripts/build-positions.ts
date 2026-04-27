@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises'
-import { readPositions, readPrices, GENERATED_FILE } from './positions-shared'
+import { readPositions, readPrices, findEventDate, GENERATED_FILE } from './positions-shared'
 
 async function main() {
   const [positions, prices] = await Promise.all([readPositions(), readPrices()])
@@ -7,39 +7,51 @@ async function main() {
   const out: any[] = []
   const missing: string[] = []
 
-  for (const { id, data } of positions) {
+  for (const { id, data, introHtml, events } of positions) {
+    const entryDate = findEventDate(events, 'entry')
+    const exitDate = findEventDate(events, 'exit')
+    if (!entryDate) {
+      missing.push(`${id}: no entry event`)
+      continue
+    }
+
+    const eventsOut = events.map((e) => ({ date: e.date, kind: e.kind, tldr: e.tldr, html: e.html }))
+    const common = {
+      id,
+      ...(introHtml ? { intro: introHtml } : {}),
+      events: eventsOut,
+      entryDate,
+      ...(exitDate ? { exitDate } : {}),
+    }
+
     if (data.kind === 'stock') {
       const lock = prices[id]
       if (!lock?.entryPrice) {
-        missing.push(`${id} (stock entry)`)
+        missing.push(`${id} (stock entry price)`)
         continue
       }
       out.push({
+        ...common,
         kind: 'stock',
-        id,
         symbol: data.symbol,
         name: data.name ?? data.symbol,
         entryPrice: lock.entryPrice,
-        entryDate: data.entryDate,
         ...(lock.exitPrice != null ? { exitPrice: lock.exitPrice } : {}),
-        ...(data.exitDate ? { exitDate: data.exitDate } : {}),
       })
     } else if (data.kind === 'crypto') {
       const lock = prices[id]
       if (!lock?.entryPrice) {
-        missing.push(`${id} (crypto entry)`)
+        missing.push(`${id} (crypto entry price)`)
         continue
       }
       out.push({
+        ...common,
         kind: 'crypto',
-        id,
         symbol: data.symbol,
         coingeckoId: data.coingeckoId,
         name: data.name ?? data.symbol,
         entryPrice: lock.entryPrice,
-        entryDate: data.entryDate,
         ...(lock.exitPrice != null ? { exitPrice: lock.exitPrice } : {}),
-        ...(data.exitDate ? { exitDate: data.exitDate } : {}),
       })
     } else if (data.kind === 'private') {
       if (data.entryValuation == null || data.currentValuation == null) {
@@ -47,14 +59,12 @@ async function main() {
         continue
       }
       out.push({
+        ...common,
         kind: 'private',
-        id,
         name: data.name,
         entryValuation: data.entryValuation,
         currentValuation: data.currentValuation,
-        entryDate: data.entryDate,
         ...(data.exitValuation != null ? { exitValuation: data.exitValuation } : {}),
-        ...(data.exitDate ? { exitDate: data.exitDate } : {}),
       })
     }
   }
@@ -68,7 +78,7 @@ async function main() {
   await fs.writeFile(GENERATED_FILE, code)
 
   if (missing.length > 0) {
-    console.warn(`! ${missing.length} position(s) missing prices — run \`bun run prices:resolve\`:`)
+    console.warn(`! ${missing.length} position(s) skipped — fix and run \`bun run prices:resolve\` if needed:`)
     for (const m of missing) console.warn(`  - ${m}`)
   }
   console.log(`✓ generated ${out.length} position(s)`)
