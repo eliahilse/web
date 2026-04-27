@@ -3,6 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import WorkClient from './WorkClient'
 
+export const dynamic = 'force-static'
+
 interface WorkMetadata {
   title: string
   role: string

@@ -3,6 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import BlogClient from './BlogClient'
 
+export const dynamic = 'force-static'
+
 interface BlogMetadata {
   title: string
   description?: string

@@ -7,6 +7,9 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import BackLink from '@/components/BackLink'
 
+export const dynamic = 'force-static'
+export const dynamicParams = false
+
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'research', `${slug}.mdx`)
   const raw = await fs.readFile(filepath, 'utf8')

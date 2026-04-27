@@ -3,6 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import SideProjectsClient from './SideProjectsClient'
 
+export const dynamic = 'force-static'
+
 interface ProjectMetadata {
   title: string
   description?: string

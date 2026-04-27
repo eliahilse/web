@@ -9,6 +9,9 @@ import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from 'rehype-raw'
 import BlogPostContent from './BlogPostContent'
 
+export const dynamic = 'force-static'
+export const dynamicParams = false
+
 async function getMdx(slug: string) {
   const filepath = path.join(process.cwd(), 'content', 'blog', `${slug}.mdx`)
   const raw = await fs.readFile(filepath, 'utf8')

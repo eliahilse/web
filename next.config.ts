@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 import createMDX from '@next/mdx'
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
 
 const nextConfig: NextConfig = {
-  output: "export",
   images: {
     unoptimized: true,
   },
@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Avoid passing non-serializable plugin functions in Turbopack mode
 const withMDX = createMDX()
+
+initOpenNextCloudflareForDev()
 
 export default withMDX(nextConfig);
