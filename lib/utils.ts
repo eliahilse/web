@@ -9,6 +9,7 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 export function formatPeriod(startDate: string, endDate: string): string {
   const fmt = (d: string) => {
+    if (d.toLowerCase() === 'present') return 'Present'
     const [year, month] = d.split('-')
     return `${MONTHS[parseInt(month, 10) - 1]} ${year}`
   }
