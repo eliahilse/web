@@ -1,10 +1,8 @@
 import type { Quote, HistoryPoint } from './types'
 
-const ONE_YEAR_DAYS = 365
-
 // yahoo finance unofficial chart endpoint — no key, daily candles
 export async function fetchStockQuote(symbol: string): Promise<Quote> {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=1y&interval=1d`
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=max&interval=1d`
   const res = await fetch(url, {
     headers: { 'user-agent': 'Mozilla/5.0 (compatible; elia-web)' },
   })
@@ -34,7 +32,7 @@ export async function fetchStockQuote(symbol: string): Promise<Quote> {
 
 // coingecko free tier — no key, daily candles
 export async function fetchCryptoQuote(coingeckoId: string): Promise<Quote> {
-  const histUrl = `https://api.coingecko.com/api/v3/coins/${encodeURIComponent(coingeckoId)}/market_chart?vs_currency=usd&days=${ONE_YEAR_DAYS}&interval=daily`
+  const histUrl = `https://api.coingecko.com/api/v3/coins/${encodeURIComponent(coingeckoId)}/market_chart?vs_currency=usd&days=max&interval=daily`
   const priceUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(coingeckoId)}&vs_currencies=usd`
 
   const [histRes, priceRes] = await Promise.all([fetch(histUrl), fetch(priceUrl)])

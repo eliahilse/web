@@ -15,14 +15,14 @@ export async function GET() {
           if (p.exitPrice != null) {
             return { ...p, exited: true, gainPct: (p.exitPrice - p.entryPrice) / p.entryPrice }
           }
-          const quote = await swrCached(`px:stock:${p.symbol}:v1`, () => fetchStockQuote(p.symbol))
+          const quote = await swrCached(`px:stock:${p.symbol}:v2`, () => fetchStockQuote(p.symbol))
           return { ...p, exited: false, quote, gainPct: (quote.price - p.entryPrice) / p.entryPrice }
         }
         if (p.kind === 'crypto') {
           if (p.exitPrice != null) {
             return { ...p, exited: true, gainPct: (p.exitPrice - p.entryPrice) / p.entryPrice }
           }
-          const quote = await swrCached(`px:crypto:${p.coingeckoId}:v1`, () => fetchCryptoQuote(p.coingeckoId))
+          const quote = await swrCached(`px:crypto:${p.coingeckoId}:v2`, () => fetchCryptoQuote(p.coingeckoId))
           return { ...p, exited: false, quote, gainPct: (quote.price - p.entryPrice) / p.entryPrice }
         }
         const exited = p.exitValuation != null
