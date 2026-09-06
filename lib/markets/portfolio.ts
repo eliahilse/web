@@ -1,10 +1,12 @@
 import type { ResolvedPosition, PositionEvent } from './types'
 
-export type SeriesPoint = { date: string; value: number; invested: number }
+export type SeriesPoint = { date: string; value: number; invested: number; count: number }
+
+export const weightOf = (p: ResolvedPosition) => p.weight ?? 1
 
 const today = () => new Date().toISOString().slice(0, 10)
 
-// equal-weight: each position contributes $1 at entry; ratios drive its value over time
+// unit-weighted: each position contributes `weight` units at entry (default 1); ratios drive its value over time
 function ratioAt(p: ResolvedPosition, date: string): number | null {
   if (date < p.entryDate) return null
 
@@ -60,13 +62,16 @@ export function computeSeries(positions: ResolvedPosition[]): SeriesPoint[] {
   return sorted.map((date) => {
     let value = 0
     let invested = 0
+    let count = 0
     for (const p of positions) {
       const r = ratioAt(p, date)
       if (r == null) continue
-      value += r
-      invested += 1
+      const w = weightOf(p)
+      value += r * w
+      invested += w
+      count += 1
     }
-    return { date, value, invested }
+    return { date, value, invested, count }
   })
 }
 
@@ -118,8 +123,9 @@ export function computeStats(positions: ResolvedPosition[], series?: SeriesPoint
   let invested = 0
   let value = 0
   for (const p of positions) {
-    invested += 1
-    value += 1 + p.gainPct
+    const w = weightOf(p)
+    invested += w
+    value += w * (1 + p.gainPct)
   }
   const totalReturnPct = invested === 0 ? 0 : value / invested - 1
 
@@ -156,4 +162,36 @@ export function flattenFeed(positions: ResolvedPosition[]): FeedItem[] {
     }
   }
   return items.sort((a, b) => b.event.date.localeCompare(a.event.date))
+}
+
+export type AllocationSlice = {
+  id: string
+  name: string
+  symbol?: string
+  kind: ResolvedPosition['kind']
+  entryUnits: number
+  currentUnits: number
+  share: number
+  gainPct: number
+}
+
+/** current size of each active position: entry units grown by its return, as a share of the whole */
+export function computeAllocation(positions: ResolvedPosition[]): AllocationSlice[] {
+  const active = positions.filter((p) => !p.exited)
+  const slices = active.map((p) => {
+    const entryUnits = weightOf(p)
+    return {
+      id: p.id,
+      name: p.name,
+      symbol: 'symbol' in p ? p.symbol : undefined,
+      kind: p.kind,
+      entryUnits,
+      currentUnits: entryUnits * (1 + p.gainPct),
+      share: 0,
+      gainPct: p.gainPct,
+    }
+  })
+  const total = slices.reduce((s, x) => s + x.currentUnits, 0)
+  for (const x of slices) x.share = total === 0 ? 0 : x.currentUnits / total
+  return slices.sort((a, b) => b.currentUnits - a.currentUnits)
 }

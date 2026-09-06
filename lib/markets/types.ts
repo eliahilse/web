@@ -18,6 +18,8 @@ export type PositionEvent = {
 type Common = {
   id: string
   intro?: string
+  /** position size in units; defaults to 1 (equal weight) */
+  weight?: number
   events: PositionEvent[]
   entryDate: string
   exitDate?: string

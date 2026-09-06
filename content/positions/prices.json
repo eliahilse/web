@@ -2,5 +2,9 @@
   "cloudflare": {
     "entryPrice": 73.8499984741211,
     "entryDateUsed": "2023-11-21"
+  },
+  "hacksaw": {
+    "entryPrice": 67.55000305175781,
+    "entryDateUsed": "2026-04-24"
   }
 }

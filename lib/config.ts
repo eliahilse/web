@@ -1,7 +1,7 @@
 // august 8, 2004 at 1:37:20 AM CET
 export const BIRTH_TIMESTAMP_UTC = Date.UTC(2004, 7, 8, 0, 37, 20);
 
-export const LOCATION = "Dresden, Germany";
+export const LOCATION = "Munich, Germany";
 
 export function calculateAge() {
   const now = Date.now();

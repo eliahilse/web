@@ -66,6 +66,19 @@ export default async function SideProjectDetail({ params }: { params: Promise<{ 
                   </span>
                 </>
               )}
+              {data.url && (
+                <>
+                  <span>•</span>
+                  <a
+                    href={String(data.url)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-1 rounded-full bg-tag text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {String(data.url).replace(/^https?:\/\//, '')} →
+                  </a>
+                </>
+              )}
               {data.tags && Array.isArray(data.tags) && data.tags.length > 0 && (
                 <>
                   <span>•</span>

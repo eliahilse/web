@@ -13,6 +13,7 @@ interface ProjectMetadata {
   endDate: string
   returns?: string
   tags?: string[]
+  url?: string
   slug: string
 }
 
@@ -38,6 +39,7 @@ async function getProjects(): Promise<ProjectMetadata[]> {
       endDate: data.endDate ?? '1970-01',
       returns: data.returns,
       tags: data.tags,
+      url: data.url,
       slug,
     } as ProjectMetadata
   }))

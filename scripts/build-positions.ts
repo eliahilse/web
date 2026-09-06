@@ -16,9 +16,15 @@ async function main() {
     }
 
     const eventsOut = events.map((e) => ({ date: e.date, kind: e.kind, tldr: e.tldr, html: e.html }))
+    const weight = data.weight != null ? Number(data.weight) : undefined
+    if (weight != null && !(weight > 0)) {
+      missing.push(`${id}: weight must be a positive number`)
+      continue
+    }
     const common = {
       id,
       ...(introHtml ? { intro: introHtml } : {}),
+      ...(weight != null ? { weight } : {}),
       events: eventsOut,
       entryDate,
       ...(exitDate ? { exitDate } : {}),

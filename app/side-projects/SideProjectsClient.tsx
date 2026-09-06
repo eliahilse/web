@@ -13,7 +13,16 @@ interface ProjectMetadata {
   endDate: string
   returns?: string
   tags?: string[]
+  url?: string
   slug: string
+}
+
+function hostOf(url: string) {
+  try {
+    return new URL(url).host
+  } catch {
+    return url
+  }
 }
 
 export default function SideProjectsClient({ projects }: { projects: ProjectMetadata[] }) {
@@ -66,6 +75,27 @@ export default function SideProjectsClient({ projects }: { projects: ProjectMeta
                           {project.title}
                         </h2>
                         <div className="flex items-center gap-2">
+                          {project.url && (
+                            <span
+                              role="link"
+                              tabIndex={0}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                window.open(project.url, '_blank', 'noopener,noreferrer')
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  e.stopPropagation()
+                                  window.open(project.url, '_blank', 'noopener,noreferrer')
+                                }
+                              }}
+                              className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80 hover:bg-tag/60 hover:text-foreground transition-colors cursor-pointer"
+                            >
+                              {hostOf(project.url)} →
+                            </span>
+                          )}
                           {project.returns && (
                             <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
                               {project.returns}

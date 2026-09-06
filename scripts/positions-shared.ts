@@ -16,6 +16,7 @@ export type IndexFrontmatter = {
   symbol?: string
   coingeckoId?: string
   name?: string
+  weight?: number
   entryValuation?: number
   currentValuation?: number
   exitValuation?: number
