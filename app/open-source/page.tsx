@@ -3,36 +3,39 @@
 import { useEffect, useState } from 'react'
 import BackLink from '@/components/BackLink'
 
-interface Package {
+interface Project {
   name: string
   description: string
-  registry: 'npm' | 'pypi'
-  url: string
-  github?: string
-  downloads?: string
+  github: string
+  npm?: string
+  tags?: string[]
   role: 'maintainer' | 'contributor'
 }
 
-const packages: Package[] = [
+const projects: Project[] = [
+  {
+    name: 'betteroffice',
+    description:
+      'Native OOXML engines in Rust: DOCX, XLSX & PPTX editing, rendering and real-time collaboration, compiled to WASM for the web. Ships to npm, crates.io and PyPI.',
+    github: 'https://github.com/openooxml/betteroffice',
+    npm: 'https://www.npmjs.com/org/betteroffice',
+    tags: ['Rust', 'WASM', 'OOXML'],
+    role: 'maintainer',
+  },
   {
     name: 'hyperfly',
-    description: 'Globally distributed intelligent load balancer on top of Cloudflare Workers',
-    registry: 'npm',
-    url: 'https://www.npmjs.com/package/hyperfly',
+    description:
+      'Binary compression for typed APIs at the edge of entropy: compiles a per-route binary protocol from the schema and observed traffic instead of shipping generic JSON through a generic compressor.',
+    github: 'https://github.com/eliahilse/hyperfly',
+    tags: ['TypeScript', 'Rust', 'Python'],
     role: 'maintainer',
   },
   {
     name: 'kyora',
-    description: 'CLI utility for AI-assisted Solana validator setup and maintenance',
-    registry: 'npm',
-    url: 'https://www.npmjs.com/package/kyora',
-    role: 'maintainer',
-  },
-  {
-    name: 'solanace',
-    description: 'High-level Python library for interacting with the Solana blockchain',
-    registry: 'pypi',
-    url: 'https://pypi.org/project/solanace/',
+    description:
+      'Tools that make coding agents trustworthy: queryable temporal runtime state exposed over MCP, plus multi-engine code review that runs Codex, Claude Code, Kimi, Grok and Qwen on the same diff with consensus ranking.',
+    github: 'https://github.com/eliahilse/kyora',
+    tags: ['TypeScript', 'MCP'],
     role: 'maintainer',
   },
 ]
@@ -60,9 +63,9 @@ export default function OpenSourcePage() {
           </div>
 
           <div className="grid gap-6">
-            {packages.map((pkg, index) => (
+            {projects.map((project, index) => (
               <div
-                key={pkg.name}
+                key={project.name}
                 className="animate-fade-in-up"
                 style={{
                   animationDelay: `${200 + index * 100}ms`,
@@ -71,47 +74,42 @@ export default function OpenSourcePage() {
               >
                 <div className="bg-card-bg border border-card-border rounded-lg p-6 hover:border-card-border-hover hover:bg-card-bg-hover transition-all duration-200">
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-xl font-semibold text-foreground font-mono">
-                        {pkg.name}
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h2 className="text-xl font-semibold text-foreground">
+                        {project.name}
                       </h2>
-                      <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
-                        {pkg.registry}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {pkg.downloads && (
-                        <span className="text-xs text-muted-foreground">
-                          {pkg.downloads} downloads
+                      {project.tags?.map((tag) => (
+                        <span key={tag} className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80">
+                          {tag}
                         </span>
-                      )}
-                      <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80 capitalize">
-                        {pkg.role}
-                      </span>
+                      ))}
                     </div>
+                    <span className="text-xs px-2 py-0.5 rounded bg-tag text-foreground/80 capitalize">
+                      {project.role}
+                    </span>
                   </div>
 
                   <p className="text-muted-foreground text-sm mb-4">
-                    {pkg.description}
+                    {project.description}
                   </p>
 
                   <div className="flex flex-wrap gap-4">
                     <a
-                      href={pkg.url}
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                     >
-                      {pkg.registry === 'npm' ? 'npm' : 'PyPI'} →
+                      GitHub →
                     </a>
-                    {pkg.github && (
+                    {project.npm && (
                       <a
-                        href={pkg.github}
+                        href={project.npm}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                       >
-                        GitHub →
+                        npm →
                       </a>
                     )}
                   </div>
