@@ -3,11 +3,15 @@
 import { useEffect, useState } from 'react'
 import BackLink from '@/components/BackLink'
 
+interface Link {
+  label: string
+  href: string
+}
+
 interface Project {
   name: string
   description: string
-  github: string
-  npm?: string
+  links: Link[]
   tags?: string[]
   role: 'maintainer' | 'contributor'
 }
@@ -17,8 +21,13 @@ const projects: Project[] = [
     name: 'betteroffice',
     description:
       'Native OOXML engines in Rust: DOCX, XLSX & PPTX editing, rendering and real-time collaboration, compiled to WASM for the web. Ships to npm, crates.io and PyPI.',
-    github: 'https://github.com/openooxml/betteroffice',
-    npm: 'https://www.npmjs.com/org/betteroffice',
+    links: [
+      { label: 'betteroffice.dev', href: 'https://betteroffice.dev' },
+      { label: 'GitHub', href: 'https://github.com/openooxml/betteroffice' },
+      { label: 'npm', href: 'https://www.npmjs.com/org/betteroffice' },
+      { label: 'crates.io', href: 'https://crates.io/search?q=betteroffice' },
+      { label: 'PyPI', href: 'https://pypi.org/search/?q=betteroffice' },
+    ],
     tags: ['Rust', 'WASM', 'OOXML'],
     role: 'maintainer',
   },
@@ -26,7 +35,10 @@ const projects: Project[] = [
     name: 'hyperfly',
     description:
       'Binary compression for typed APIs at the edge of entropy: compiles a per-route binary protocol from the schema and observed traffic instead of shipping generic JSON through a generic compressor.',
-    github: 'https://github.com/eliahilse/hyperfly',
+    links: [
+      { label: 'hyperfly.dev', href: 'https://hyperfly.dev' },
+      { label: 'GitHub', href: 'https://github.com/eliahilse/hyperfly' },
+    ],
     tags: ['TypeScript', 'Rust', 'Python'],
     role: 'maintainer',
   },
@@ -34,7 +46,10 @@ const projects: Project[] = [
     name: 'kyora',
     description:
       'Tools that make coding agents trustworthy: queryable temporal runtime state exposed over MCP, plus multi-engine code review that runs Codex, Claude Code, Kimi, Grok and Qwen on the same diff with consensus ranking.',
-    github: 'https://github.com/eliahilse/kyora',
+    links: [
+      { label: 'kyora.sh', href: 'https://kyora.sh' },
+      { label: 'GitHub', href: 'https://github.com/eliahilse/kyora' },
+    ],
     tags: ['TypeScript', 'MCP'],
     role: 'maintainer',
   },
@@ -94,24 +109,17 @@ export default function OpenSourcePage() {
                   </p>
 
                   <div className="flex flex-wrap gap-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
-                    >
-                      GitHub →
-                    </a>
-                    {project.npm && (
+                    {project.links.map((link) => (
                       <a
-                        href={project.npm}
+                        key={link.href}
+                        href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-foreground hover:opacity-70 transition-colors duration-200"
                       >
-                        npm →
+                        {link.label} →
                       </a>
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
