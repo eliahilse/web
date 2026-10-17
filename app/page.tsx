@@ -72,7 +72,7 @@ export default function Home() {
             style={{ transitionDelay: "200ms" }}
           >
             <p className="text-lg text-muted-foreground">
-              Principal Software Engineer & Tech Lover
+              Principal Technologist
             </p>
           </div>
 

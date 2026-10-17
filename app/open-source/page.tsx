@@ -20,7 +20,7 @@ const projects: Project[] = [
   {
     name: 'betteroffice',
     description:
-      'Native OOXML engines in Rust: DOCX, XLSX & PPTX editing, rendering and real-time collaboration, compiled to WASM for the web. Ships to npm, crates.io and PyPI.',
+      'Native OOXML engines in Rust: DOCX, XLSX & PPTX editing, rendering and real-time collaboration, compiled to WASM for the web. Ships to npm, crates.io and PyPI, and is used by OpenCode.',
     links: [
       { label: 'betteroffice.dev', href: 'https://betteroffice.dev' },
       { label: 'GitHub', href: 'https://github.com/openooxml/betteroffice' },
@@ -40,17 +40,6 @@ const projects: Project[] = [
       { label: 'GitHub', href: 'https://github.com/eliahilse/hyperfly' },
     ],
     tags: ['TypeScript', 'Rust', 'Python'],
-    role: 'maintainer',
-  },
-  {
-    name: 'kyora',
-    description:
-      'Tools that make coding agents trustworthy: queryable temporal runtime state exposed over MCP, plus multi-engine code review that runs Codex, Claude Code, Kimi, Grok and Qwen on the same diff with consensus ranking.',
-    links: [
-      { label: 'kyora.sh', href: 'https://kyora.sh' },
-      { label: 'GitHub', href: 'https://github.com/eliahilse/kyora' },
-    ],
-    tags: ['TypeScript', 'MCP'],
     role: 'maintainer',
   },
 ]
@@ -74,7 +63,7 @@ export default function OpenSourcePage() {
           >
             <BackLink href="/" label="Back to home" />
             <h1 className="text-4xl font-bold text-foreground mb-4 font-serif">Open Source</h1>
-            <p className="text-lg text-muted-foreground">Libraries and packages published for the community</p>
+            <p className="text-lg text-muted-foreground">Built in the open, for the greater good</p>
           </div>
 
           <div className="grid gap-6">
