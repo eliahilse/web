@@ -32,7 +32,7 @@ const competitions: CompetitionMetadata[] = [
     demo: "https://synapse.elia.vc",
     github: "https://github.com/synapsedotai/synapse",
     hackathon: "CDTM x Anthropic Hackathon (ft. Elevenlabs, Lovable)",
-    placement: "2nd (jury debated 1h)",
+    placement: "2nd (v close)",
     location: "Munich, DE",
     track: "Visionaries Club",
     team: [
