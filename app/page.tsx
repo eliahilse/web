@@ -44,14 +44,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-8 relative">
+    <div className="min-h-screen flex flex-col justify-between py-8 px-[5vw] md:p-8 relative">
       {/* Background */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center grayscale opacity-20 dark:opacity-10"
         style={{ backgroundImage: "url(/img/bg2.avif)" }}
       />
       <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="max-w-2xl mx-auto text-center flex flex-col">
+        <div className="w-full md:w-auto max-w-2xl mx-auto text-center flex flex-col items-center">
           {/* Name */}
           <div
             className={`transform transition-all duration-700 ease-out ${
@@ -77,7 +77,7 @@ export default function Home() {
           </div>
 
           {/* Categories */}
-          <div className="flex flex-col gap-4 w-[90vw] max-w-md md:w-auto md:min-w-[340px]">
+          <div className="flex flex-col gap-4 w-full max-w-md md:min-w-[340px]">
             {categories.map((category, index) => (
               <div
                 key={category.name}
