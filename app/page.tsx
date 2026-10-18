@@ -77,7 +77,7 @@ export default function Home() {
           </div>
 
           {/* Categories */}
-          <div className="flex flex-col gap-4 max-w-md">
+          <div className="flex flex-col gap-4 max-w-md md:min-w-[340px]">
             {categories.map((category, index) => (
               <div
                 key={category.name}
